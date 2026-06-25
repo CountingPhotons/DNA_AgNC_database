@@ -107,14 +107,17 @@
             <div class="props-grid">
               ${propCell('Absorption max', m.absorption_max ? `${Math.round(m.absorption_max)} <span style="font-size:0.65em;opacity:0.6;">nm</span>` : '—', true, nmColor(m.absorption_max))}
               ${propCell('Emission max', m.emission_max ? `${Math.round(m.emission_max)} <span style="font-size:0.65em;opacity:0.6;">nm</span>` : '—', true, nmColor(m.emission_max))}
+              ${propCell('Emission max 2 (dual emitter)', m.emission_max_2 ? `${Math.round(m.emission_max_2)} <span style="font-size:0.65em;opacity:0.6;">nm</span>` : '—', true, nmColor(m.emission_max_2))}
               ${propCell('Cluster Size', m.cluster_size ? `Ag<sub>${m.cluster_size}</sub> (${m.cluster_size} atoms)` : '—')}
               ${propCell('Stokes Shift', stokes != null ? `${stokes} <span style="font-size:0.7em;opacity:0.5;">nm</span>` : '—')}
               ${propCell('Quantum Yield (Φ)', m.quantum_yield != null ? m.quantum_yield.toFixed(3) : '—', false, m.quantum_yield != null ? 'var(--accent)' : null)}
               ${propCell('Extinction Coeff. (ε)', m.extinction_coefficient != null ? `${Math.round(m.extinction_coefficient).toLocaleString('en-US')} <span style="font-size:0.65em;opacity:0.5;">M⁻¹cm⁻¹</span>` : '—')}
               ${propCell('Brightness (ε·Φ/1000)', brightness != null ? brightness : '—')}
               ${propCell('Fluorescence Lifetime', m.lifetime_ns != null ? `${m.lifetime_ns} <span style="font-size:0.7em;opacity:0.5;">ns</span>` : '—')}
+              ${propCell('Fluorescence Lifetime (delayed)', m.lifetime_us != null ? `${m.lifetime_us} <span style="font-size:0.7em;opacity:0.5;">µs</span>` : '—')}
               ${propCell('Solvent / Matrix', m.solvent || '—')}
-              ${propCell('Mass Formula (MS)', m.mass_formula || '—')}
+              ${propCell('Chemical Formula (MS)', m.mass_formula ? chemNotation(m.mass_formula) : '—')}
+              ${propCell('Measured m/z (MS)', m.mz_value ? chemNotation(m.mz_value) : '—')}
             </div>
 
             ${hasSpectra ? `

@@ -67,6 +67,23 @@ function safeFilenameBase(name) {
     .replace(/[^\w]/g, '');
 }
 
+/**
+ * Render simple chemical-formula markup as real subscript/superscript HTML.
+ * Syntax: _{...} -> <sub>...</sub>,  ^{...} -> <sup>...</sup>
+ * e.g. "[Ag_{6}(DNA)*3H_{2}O]^{2+}" -> "[Ag<sub>6</sub>(DNA)*3H<sub>2</sub>O]<sup>2+</sup>"
+ * Input is HTML-escaped first, so this is safe to use on user-entered text.
+ */
+function chemNotation(text) {
+  if (!text) return '';
+  const escaped = String(text)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+  return escaped
+    .replace(/_\{([^}]*)\}/g, '<sub>$1</sub>')
+    .replace(/\^\{([^}]*)\}/g, '<sup>$1</sup>');
+}
+
 /** Fetch JSON with a friendly error if the file is missing (helps local testing). */
 async function fetchJSON(path) {
   const res = await fetch(path);

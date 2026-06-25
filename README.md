@@ -1,11 +1,11 @@
-[README.md](https://github.com/user-attachments/files/29329651/README.md)
 # DNA-AgNC Database
 
 A browsable, read-only catalog of DNA-stabilized silver nanocluster
 (DNA-AgNC) characterization data — absorption/emission spectra, quantum
 yield, lifetime, cluster composition, DNA sequence, and reference images.
 
-**🔗 Live site:** [view it here](https://countingphotons.github.io/DNA_AgNC_database/)
+**🔗 Live site:** [view it here](https://YOUR-USERNAME.github.io/YOUR-REPO-NAME/)
+*(replace this link once your GitHub Pages URL is live)*
 
 ## What's in here
 
@@ -33,20 +33,17 @@ entries through this site. It is rebuilt and re-published periodically
 from the working database maintained by the project team.
 
 **Spot an error, or have data to contribute?** Please contact
-Simon Lind (simon.lind@chem.ku.dk) or Tom Vosch (Tom@chem.ku.dk).
+[your name / email / lab contact] rather than opening a pull request —
+changes are made upstream and republished here.
 
 ## Citation
 
 If you use data from this database, please cite:
 
-> S.W. Lind, et al. *DNA-AgNC Database*, 2026. Available at:
-> https://countingphotons.github.io/DNA_AgNC_database/
-
-*Database last updated: June 2026*
+> *(add your citation / paper / lab reference here)*
 
 ## Data license
 
-This data is licensed under
-[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) —
-you are free to share and adapt the data for any purpose, including
-commercially, provided appropriate credit is given.
+*(add a note here — e.g. "Data is shared for academic/research use;
+contact us before redistribution" or a formal license like CC-BY-4.0,
+whichever fits your group's policy)*
