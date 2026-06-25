@@ -10,15 +10,15 @@
   "absorption_max": 543.0,
   "emission_max": 623.0,
   "emission_max_2": 850.0,
-  "quantum_yield": 0.2,
+  "quantum_yield": 0.02,
   "extinction_coefficient": null,
   "brightness": null,
-  "lifetime_ns": null,
+  "lifetime_ns": "IRF-limited",
   "solvent": "Water",
-  "lifetime_us": 67.0,
+  "lifetime_us": "67.0",
   "reference": "L. Liccardo et al. (2026), JACS",
   "doi": "https://doi.org/10.1021/jacs.6c04812",
-  "notes": "Fluorescence lifetime is IRF-limited",
+  "notes": "Fluorescence lifetime is IRF-limited.",
   "ab_spectrum": [
     [
       799.0,
@@ -11461,5 +11461,6 @@
   ],
   "images": [],
   "created_at": "2026-06-25T12:44:53.650679",
-  "updated_at": "2026-06-25T12:44:53.650773"
+  "updated_at": "2026-06-25T13:34:43.641650",
+  "structure_solved": false
 }

@@ -399,20 +399,20 @@
     "id": "625cb61e",
     "slug": "mlq8",
     "name": "MLQ8",
-    "description": "",
+    "description": "Made from same DNA template as ML8 sample. Fluorescence lifetime being IRF-limited, only showing a long-lived fluorescence lifetime.",
     "dna_sequence": "TGGACGGCGG",
     "cluster_size": 19,
     "mass_formula": "C_{196}H_{244}N_{86}O_{116}P_{18}[Ag_{19}]^{13+}",
     "absorption_max": 545.0,
-    "emission_max": 623.0,
+    "emission_max": 881.0,
     "quantum_yield": 0.016,
     "extinction_coefficient": null,
     "brightness": null,
-    "lifetime_ns": "IRF-limited",
+    "lifetime_ns": "",
     "solvent": "Water",
     "reference": "L. Liccardo et al. (2026), JACS",
     "doi": "https://doi.org/10.1021/jacs.6c04812",
-    "notes": "",
+    "notes": "Protein Data Bank (PDB) with the accession code 23LP.",
     "ab_spectrum": [
       [
         799.0,
@@ -11855,10 +11855,11 @@
     ],
     "images": [],
     "created_at": "2026-06-25T09:46:56.863437",
-    "updated_at": "2026-06-25T13:07:32.288732",
+    "updated_at": "2026-06-25T13:33:57.792474",
     "mz_value": "1649.881",
-    "emission_max_2": 881.0,
-    "lifetime_us": "22"
+    "emission_max_2": null,
+    "lifetime_us": "22",
+    "structure_solved": true
   },
   {
     "id": "01a77eaa",
@@ -11872,15 +11873,15 @@
     "absorption_max": 543.0,
     "emission_max": 623.0,
     "emission_max_2": 850.0,
-    "quantum_yield": 0.2,
+    "quantum_yield": 0.02,
     "extinction_coefficient": null,
     "brightness": null,
-    "lifetime_ns": null,
+    "lifetime_ns": "IRF-limited",
     "solvent": "Water",
-    "lifetime_us": 67.0,
+    "lifetime_us": "67.0",
     "reference": "L. Liccardo et al. (2026), JACS",
     "doi": "https://doi.org/10.1021/jacs.6c04812",
-    "notes": "Fluorescence lifetime is IRF-limited",
+    "notes": "Fluorescence lifetime is IRF-limited.",
     "ab_spectrum": [
       [
         799.0,
@@ -23323,6 +23324,7 @@
     ],
     "images": [],
     "created_at": "2026-06-25T12:44:53.650679",
-    "updated_at": "2026-06-25T12:44:53.650773"
+    "updated_at": "2026-06-25T13:34:43.641650",
+    "structure_solved": false
   }
 ]

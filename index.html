@@ -26,7 +26,7 @@
     <div class="hero">
       <div class="hero-eyebrow">DNA-Stabilized Silver Nanoclusters</div>
       <h1 class="hero-title"><span class="gradient">Nanocluster</span> Database</h1>
-      <p class="hero-sub">Catalog, search, and visualize data of DNA-AgNC's.<br><span id="clusterCount">…</span> characterized.</p>
+      <p class="hero-sub">Catalog, search, and visualize data of DNA-AgNC's.<br><span id="clusterCountLine">…</span></p>
       <div class="hero-actions">
         <a href="library.html" class="btn btn-primary">Browse Library →</a>
         <a href="spectra.html" class="btn btn-ghost">Spectra Viewer →</a>
@@ -114,8 +114,10 @@
 
     async function init() {
       const materials = await fetchJSON('data/materials.json');
-      document.getElementById('clusterCount').textContent =
-        `${materials.length} cluster${materials.length !== 1 ? 's' : ''}`;
+      const solvedCount = materials.filter(m => m.structure_solved).length;
+      document.getElementById('clusterCountLine').innerHTML =
+        `<span style="color:var(--text);">${materials.length}</span> cluster${materials.length !== 1 ? 's' : ''} characterized, ` +
+        `<span style="color:var(--text);">${solvedCount}</span> structure${solvedCount !== 1 ? 's' : ''} solved.`;
 
       plotData = materials.filter(m => m.absorption_max && m.emission_max);
 
