@@ -63,6 +63,13 @@
       const stokes = (m.absorption_max && m.emission_max) ? Math.round(m.emission_max - m.absorption_max) : null;
       const brightness = (m.quantum_yield && m.extinction_coefficient) ? (m.quantum_yield * m.extinction_coefficient / 1000).toFixed(1) : null;
 
+      let emissionHTML = m.emission_max
+        ? `<span style="color:${nmColor(m.emission_max)};">${Math.round(m.emission_max)}</span> <span style="font-size:0.65em;opacity:0.6;">nm</span>`
+        : '—';
+      if (m.emission_max_2) {
+        emissionHTML += ` <span style="font-size:0.7em;opacity:0.4;">/</span> <span style="color:${nmColor(m.emission_max_2)};">${Math.round(m.emission_max_2)}</span> <span style="font-size:0.65em;opacity:0.6;">nm</span>`;
+      }
+
       const hasSpectra = m.ab_spectrum || m.em_spectrum;
 
       const galleryHTML = imgs.length ? `
@@ -106,15 +113,14 @@
 
             <div class="props-grid">
               ${propCell('Absorption max', m.absorption_max ? `${Math.round(m.absorption_max)} <span style="font-size:0.65em;opacity:0.6;">nm</span>` : '—', true, nmColor(m.absorption_max))}
-              ${propCell('Emission max', m.emission_max ? `${Math.round(m.emission_max)} <span style="font-size:0.65em;opacity:0.6;">nm</span>` : '—', true, nmColor(m.emission_max))}
-              ${propCell('Emission max 2 (dual emitter)', m.emission_max_2 ? `${Math.round(m.emission_max_2)} <span style="font-size:0.65em;opacity:0.6;">nm</span>` : '—', true, nmColor(m.emission_max_2))}
+              ${propCell('Emission max', emissionHTML, true)}
               ${propCell('Cluster Size', m.cluster_size ? `Ag<sub>${m.cluster_size}</sub> (${m.cluster_size} atoms)` : '—')}
               ${propCell('Stokes Shift', stokes != null ? `${stokes} <span style="font-size:0.7em;opacity:0.5;">nm</span>` : '—')}
               ${propCell('Quantum Yield (Φ)', m.quantum_yield != null ? m.quantum_yield.toFixed(3) : '—', false, m.quantum_yield != null ? 'var(--accent)' : null)}
               ${propCell('Extinction Coeff. (ε)', m.extinction_coefficient != null ? `${Math.round(m.extinction_coefficient).toLocaleString('en-US')} <span style="font-size:0.65em;opacity:0.5;">M⁻¹cm⁻¹</span>` : '—')}
               ${propCell('Brightness (ε·Φ/1000)', brightness != null ? brightness : '—')}
-              ${propCell('Fluorescence Lifetime', m.lifetime_ns != null ? `${m.lifetime_ns} <span style="font-size:0.7em;opacity:0.5;">ns</span>` : '—')}
-              ${propCell('Fluorescence Lifetime (delayed)', m.lifetime_us != null ? `${m.lifetime_us} <span style="font-size:0.7em;opacity:0.5;">µs</span>` : '—')}
+              ${propCell('Fluorescence Lifetime (ns)', m.lifetime_ns ? m.lifetime_ns : '—')}
+              ${propCell('Long-lived Lifetime (µs)', m.lifetime_us ? m.lifetime_us : '—')}
               ${propCell('Solvent / Matrix', m.solvent || '—')}
               ${propCell('Chemical Formula (MS)', m.mass_formula ? chemNotation(m.mass_formula) : '—')}
               ${propCell('Measured m/z (MS)', m.mz_value ? chemNotation(m.mz_value) : '—')}
@@ -148,18 +154,9 @@
 
             <div class="sidebar-card">
               <h3>Record</h3>
-              <div class="meta-row"><span class="meta-key">ID</span><span class="meta-val">${m.id}</span></div>
-              <div class="meta-row"><span class="meta-key">Slug</span><span class="meta-val">${m.slug}</span></div>
               <div class="meta-row"><span class="meta-key">Added</span><span class="meta-val">${(m.created_at || '').slice(0, 10)}</span></div>
               <div class="meta-row"><span class="meta-key">Updated</span><span class="meta-val">${(m.updated_at || '').slice(0, 10)}</span></div>
             </div>
-
-            ${hasSpectra ? `
-            <div class="sidebar-card">
-              <h3>Spectrum Points</h3>
-              ${m.ab_spectrum ? `<div class="meta-row"><span class="meta-key">Absorption</span><span class="meta-val" style="color:var(--accent);">${m.ab_spectrum.length} pts</span></div>` : ''}
-              ${m.em_spectrum ? `<div class="meta-row"><span class="meta-key">Emission</span><span class="meta-val" style="color:var(--accent);">${m.em_spectrum.length} pts</span></div>` : ''}
-            </div>` : ''}
           </aside>
         </div>
       `;
