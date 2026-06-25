@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cluster Library — FluorDB</title>
+  <link rel="stylesheet" href="static/css/style.css">
+  <script src="static/js/common.js"></script>
+</head>
+<body>
+  <nav>
+    <a href="index.html" class="nav-brand">
+      <div class="logo-mark"></div>
+      <span>DNA-AgNC <span class="accent">DB</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="library.html" class="active">Library</a>
+      <a href="spectra.html">Spectra Viewer</a>
+      <a href="data/materials.json" class="nav-pill">⬇ Export JSON</a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="library-header">
+      <h1>Cluster Library</h1>
+      <p class="muted" style="font-size:0.82rem;">All DNA-AgNC materials in the database</p>
+    </div>
+
+    <div class="filter-bar">
+      <div class="fg">
+        <label>Search (name, description, DNA sequence)</label>
+        <input type="text" id="searchInput" placeholder="Search…">
+      </div>
+    </div>
+
+    <div class="count-label">
+      Showing <span id="countNum">0</span> cluster<span id="countPlural">s</span>
+    </div>
+
+    <div class="table-wrap">
+      <table id="clusterTable">
+        <thead>
+          <tr>
+            <th class="sortable" data-sort="name">Name <span class="sort-arrow">⇅</span></th>
+            <th class="sortable" data-sort="dna_sequence">DNA Sequence <span class="sort-arrow">⇅</span></th>
+            <th class="sortable" data-sort="cluster_size">Cluster Size <span class="sort-arrow">⇅</span></th>
+            <th class="sortable" data-sort="absorption_max">Abs max [nm] <span class="sort-arrow">⇅</span></th>
+            <th class="sortable" data-sort="emission_max">Em max [nm] <span class="sort-arrow">⇅</span></th>
+            <th class="sortable" data-sort="quantum_yield">Quantum Yield <span class="sort-arrow">⇅</span></th>
+            <th class="sortable" data-sort="extinction_coefficient">ε [M⁻¹cm⁻¹] <span class="sort-arrow">⇅</span></th>
+            <th>Solvent</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="tableBody">
+          <tr class="empty-row"><td colspan="9">Loading…</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <footer>
+    DNA-AgNC DB — DNA-Stabilized Silver Nanocluster Database &nbsp;·&nbsp;
+    read-only public mirror &nbsp;·&nbsp; data published as static JSON
+  </footer>
+
+  <script>
+    let allMaterials = [];
+    let sortCol = 'name';
+    let sortDir = 'asc';
+    let query = '';
+
+    function applyFilterSort() {
+      let rows = allMaterials;
+      const q = query.toLowerCase().trim();
+      if (q) {
+        rows = rows.filter(m =>
+          (m.name || '').toLowerCase().includes(q) ||
+          (m.description || '').toLowerCase().includes(q) ||
+          (m.dna_sequence || '').toLowerCase().includes(q)
+        );
+      }
+
+      const reverse = sortDir === 'desc';
+      rows = [...rows].sort((a, b) => {
+        let va = a[sortCol], vb = b[sortCol];
+        if (sortCol === 'name' || sortCol === 'dna_sequence') {
+          va = (va || '').toLowerCase(); vb = (vb || '').toLowerCase();
+          return reverse ? vb.localeCompare(va) : va.localeCompare(vb);
+        }
+        // numeric columns — nulls sort to the end regardless of direction
+        const na = (va === null || va === undefined);
+        const nb = (vb === null || vb === undefined);
+        if (na && nb) return 0;
+        if (na) return 1;
+        if (nb) return -1;
+        return reverse ? vb - va : va - vb;
+      });
+
+      renderRows(rows);
+      document.getElementById('countNum').textContent = rows.length;
+      document.getElementById('countPlural').textContent = rows.length === 1 ? '' : 's';
+
+      document.querySelectorAll('thead th.sortable').forEach(th => {
+        const isActive = th.dataset.sort === sortCol;
+        th.classList.toggle('sort-active', isActive);
+        th.querySelector('.sort-arrow').textContent = isActive ? (sortDir === 'asc' ? '▲' : '▼') : '⇅';
+      });
+    }
+
+    function renderRows(rows) {
+      const tbody = document.getElementById('tableBody');
+      if (!rows.length) {
+        tbody.innerHTML = `<tr class="empty-row"><td colspan="9">No materials found.</td></tr>`;
+        return;
+      }
+      tbody.innerHTML = rows.map(m => {
+        const seq = m.dna_sequence ? m.dna_sequence : '—';
+        const cluster = m.cluster_size ? `Ag<sub>${m.cluster_size}</sub>` : '—';
+        const abs = m.absorption_max
+          ? `<span class="color-swatch"><span class="swatch-dot" style="background:${nmColor(m.absorption_max)};"></span>${Math.round(m.absorption_max)}</span>`
+          : '—';
+        const em = m.emission_max
+          ? `<span class="color-swatch"><span class="swatch-dot" style="background:${nmColor(m.emission_max)};"></span>${Math.round(m.emission_max)}</span>`
+          : '—';
+        const qy = m.quantum_yield != null ? m.quantum_yield.toFixed(3) : '—';
+        const ec = m.extinction_coefficient != null ? Math.round(m.extinction_coefficient).toLocaleString('en-US').replace(/,/g, '.') : '—';
+        const solvent = m.solvent || '—';
+        const slug = encodeURIComponent(m.slug);
+        return `
+          <tr onclick="location.href='material.html?slug=${slug}'">
+            <td class="td-name"><a href="material.html?slug=${slug}">${m.name}</a></td>
+            <td class="td-seq" title="${seq}">${seq}</td>
+            <td>${cluster}</td>
+            <td>${abs}</td>
+            <td>${em}</td>
+            <td>${qy}</td>
+            <td>${ec}</td>
+            <td style="color:var(--text);">${solvent}</td>
+            <td class="actions-cell">
+              <a href="data/materials/${m.slug}.json" class="btn btn-ghost btn-sm" onclick="event.stopPropagation()">↓ JSON</a>
+            </td>
+          </tr>`;
+      }).join('');
+    }
+
+    document.querySelectorAll('thead th.sortable').forEach(th => {
+      th.addEventListener('click', () => {
+        const col = th.dataset.sort;
+        sortDir = (col === sortCol) ? (sortDir === 'asc' ? 'desc' : 'asc') : 'asc';
+        sortCol = col;
+        applyFilterSort();
+      });
+    });
+
+    document.getElementById('searchInput').addEventListener('input', e => {
+      query = e.target.value;
+      applyFilterSort();
+    });
+
+    async function init() {
+      allMaterials = await fetchJSON('data/materials.json');
+      applyFilterSort();
+    }
+    init();
+  </script>
+</body>
+</html>

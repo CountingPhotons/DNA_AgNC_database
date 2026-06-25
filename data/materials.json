@@ -1,0 +1,398 @@
+[
+  {
+    "id": "a1b2c3d4",
+    "slug": "dnc-green-530",
+    "name": "DNA-NC Green-530",
+    "description": "Green-emitting DNA-stabilized silver nanocluster with a cytosine-rich scaffold.",
+    "dna_sequence": "CCCCAACCCGCCCAACCC",
+    "cluster_size": 6,
+    "absorption_max": 490.0,
+    "emission_max": 530.0,
+    "quantum_yield": 0.42,
+    "extinction_coefficient": 85000.0,
+    "brightness": null,
+    "lifetime_ns": 2.1,
+    "solvent": "10 mM PBS pH 7.4",
+    "reference": "Schultz et al. (2004) PNAS",
+    "doi": "10.1073/pnas.0408575101",
+    "notes": "Stable over weeks at 4\u00b0C. Sensitive to ionic strength.",
+    "ab_spectrum": [
+      [
+        450,
+        0.05
+      ],
+      [
+        460,
+        0.12
+      ],
+      [
+        470,
+        0.28
+      ],
+      [
+        480,
+        0.58
+      ],
+      [
+        490,
+        1.0
+      ],
+      [
+        500,
+        0.88
+      ],
+      [
+        510,
+        0.52
+      ],
+      [
+        520,
+        0.18
+      ],
+      [
+        530,
+        0.04
+      ]
+    ],
+    "em_spectrum": [
+      [
+        490,
+        0.02
+      ],
+      [
+        500,
+        0.08
+      ],
+      [
+        510,
+        0.35
+      ],
+      [
+        520,
+        0.78
+      ],
+      [
+        530,
+        1.0
+      ],
+      [
+        540,
+        0.82
+      ],
+      [
+        550,
+        0.45
+      ],
+      [
+        560,
+        0.15
+      ],
+      [
+        570,
+        0.03
+      ]
+    ],
+    "images": [],
+    "created_at": "2024-01-15T10:00:00",
+    "updated_at": "2024-01-15T10:00:00"
+  },
+  {
+    "id": "e5f6g7h8",
+    "slug": "dnc-red-650",
+    "name": "DNA-NC Red-650",
+    "description": "Far-red emitting Ag nanocluster templated on a 12-mer DNA strand.",
+    "dna_sequence": "GCTTGTTGTTTTT",
+    "cluster_size": 8,
+    "absorption_max": 620.0,
+    "emission_max": 650.0,
+    "quantum_yield": 0.35,
+    "extinction_coefficient": 120000.0,
+    "brightness": null,
+    "lifetime_ns": 3.4,
+    "solvent": "10 mM PBS pH 7.4",
+    "reference": "Petty et al. (2007) JACS",
+    "doi": "10.1021/ja0706787",
+    "notes": "Shows two-photon absorption. Long lifetime useful for FLIM.",
+    "ab_spectrum": [
+      [
+        560,
+        0.02
+      ],
+      [
+        575,
+        0.06
+      ],
+      [
+        590,
+        0.2
+      ],
+      [
+        605,
+        0.55
+      ],
+      [
+        620,
+        1.0
+      ],
+      [
+        635,
+        0.78
+      ],
+      [
+        650,
+        0.3
+      ],
+      [
+        665,
+        0.07
+      ],
+      [
+        680,
+        0.01
+      ]
+    ],
+    "em_spectrum": [
+      [
+        600,
+        0.01
+      ],
+      [
+        615,
+        0.06
+      ],
+      [
+        630,
+        0.28
+      ],
+      [
+        640,
+        0.72
+      ],
+      [
+        650,
+        1.0
+      ],
+      [
+        660,
+        0.85
+      ],
+      [
+        670,
+        0.52
+      ],
+      [
+        680,
+        0.22
+      ],
+      [
+        690,
+        0.06
+      ],
+      [
+        700,
+        0.01
+      ]
+    ],
+    "images": [],
+    "created_at": "2024-01-16T11:00:00",
+    "updated_at": "2024-01-16T11:00:00"
+  },
+  {
+    "id": "i9j0k1l2",
+    "slug": "dnc-nir-780",
+    "name": "DNA-NC NIR-780",
+    "description": "Near-infrared silver nanocluster on a G-quadruplex-forming sequence.",
+    "dna_sequence": "GGGTAGGGCGGGTTGGG",
+    "cluster_size": 10,
+    "absorption_max": 740.0,
+    "emission_max": 780.0,
+    "quantum_yield": 0.18,
+    "extinction_coefficient": 200000.0,
+    "brightness": null,
+    "lifetime_ns": 5.2,
+    "solvent": "10 mM Tris pH 8.0 + 100 mM NaCl",
+    "reference": "Gwinn et al. (2008) Adv. Mater.",
+    "doi": "10.1002/adma.200800162",
+    "notes": "Requires monovalent salt for G-quadruplex folding. NIR window suitable for bioimaging.",
+    "ab_spectrum": [
+      [
+        660,
+        0.02
+      ],
+      [
+        680,
+        0.08
+      ],
+      [
+        700,
+        0.25
+      ],
+      [
+        720,
+        0.65
+      ],
+      [
+        740,
+        1.0
+      ],
+      [
+        755,
+        0.88
+      ],
+      [
+        770,
+        0.5
+      ],
+      [
+        785,
+        0.15
+      ],
+      [
+        800,
+        0.03
+      ]
+    ],
+    "em_spectrum": [
+      [
+        710,
+        0.01
+      ],
+      [
+        730,
+        0.08
+      ],
+      [
+        750,
+        0.35
+      ],
+      [
+        765,
+        0.72
+      ],
+      [
+        780,
+        1.0
+      ],
+      [
+        795,
+        0.82
+      ],
+      [
+        810,
+        0.48
+      ],
+      [
+        825,
+        0.18
+      ],
+      [
+        840,
+        0.04
+      ]
+    ],
+    "images": [],
+    "created_at": "2024-01-17T12:00:00",
+    "updated_at": "2024-01-17T12:00:00"
+  },
+  {
+    "id": "m3n4o5p6",
+    "slug": "dnc-yellow-575",
+    "name": "DNA-NC Yellow-575",
+    "description": "Yellow-orange emitting nanocluster with a mixed AT/GC scaffold.",
+    "dna_sequence": "ATATCGCGATATCGCG",
+    "cluster_size": 7,
+    "absorption_max": 545.0,
+    "emission_max": 575.0,
+    "quantum_yield": 0.28,
+    "extinction_coefficient": 95000.0,
+    "brightness": null,
+    "lifetime_ns": 2.8,
+    "solvent": "10 mM PBS pH 7.4",
+    "reference": "Obliosca et al. (2013) ACS Nano",
+    "doi": "10.1021/nn401185b",
+    "notes": "Good photostability under continuous illumination.",
+    "ab_spectrum": [
+      [
+        480,
+        0.03
+      ],
+      [
+        495,
+        0.1
+      ],
+      [
+        510,
+        0.3
+      ],
+      [
+        525,
+        0.65
+      ],
+      [
+        545,
+        1.0
+      ],
+      [
+        558,
+        0.82
+      ],
+      [
+        570,
+        0.42
+      ],
+      [
+        582,
+        0.12
+      ],
+      [
+        595,
+        0.02
+      ]
+    ],
+    "em_spectrum": [
+      [
+        520,
+        0.01
+      ],
+      [
+        535,
+        0.08
+      ],
+      [
+        548,
+        0.32
+      ],
+      [
+        560,
+        0.72
+      ],
+      [
+        575,
+        1.0
+      ],
+      [
+        585,
+        0.88
+      ],
+      [
+        595,
+        0.55
+      ],
+      [
+        608,
+        0.22
+      ],
+      [
+        620,
+        0.06
+      ],
+      [
+        632,
+        0.01
+      ]
+    ],
+    "images": [],
+    "created_at": "2024-01-18T09:00:00",
+    "updated_at": "2024-01-18T09:00:00"
+  }
+]

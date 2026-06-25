@@ -1,0 +1,101 @@
+{
+  "id": "m3n4o5p6",
+  "slug": "dnc-yellow-575",
+  "name": "DNA-NC Yellow-575",
+  "description": "Yellow-orange emitting nanocluster with a mixed AT/GC scaffold.",
+  "dna_sequence": "ATATCGCGATATCGCG",
+  "cluster_size": 7,
+  "absorption_max": 545.0,
+  "emission_max": 575.0,
+  "quantum_yield": 0.28,
+  "extinction_coefficient": 95000.0,
+  "brightness": null,
+  "lifetime_ns": 2.8,
+  "solvent": "10 mM PBS pH 7.4",
+  "reference": "Obliosca et al. (2013) ACS Nano",
+  "doi": "10.1021/nn401185b",
+  "notes": "Good photostability under continuous illumination.",
+  "ab_spectrum": [
+    [
+      480,
+      0.03
+    ],
+    [
+      495,
+      0.1
+    ],
+    [
+      510,
+      0.3
+    ],
+    [
+      525,
+      0.65
+    ],
+    [
+      545,
+      1.0
+    ],
+    [
+      558,
+      0.82
+    ],
+    [
+      570,
+      0.42
+    ],
+    [
+      582,
+      0.12
+    ],
+    [
+      595,
+      0.02
+    ]
+  ],
+  "em_spectrum": [
+    [
+      520,
+      0.01
+    ],
+    [
+      535,
+      0.08
+    ],
+    [
+      548,
+      0.32
+    ],
+    [
+      560,
+      0.72
+    ],
+    [
+      575,
+      1.0
+    ],
+    [
+      585,
+      0.88
+    ],
+    [
+      595,
+      0.55
+    ],
+    [
+      608,
+      0.22
+    ],
+    [
+      620,
+      0.06
+    ],
+    [
+      632,
+      0.01
+    ]
+  ],
+  "images": [],
+  "created_at": "2024-01-18T09:00:00",
+  "updated_at": "2024-01-18T09:00:00"
+}

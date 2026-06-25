@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="pageTitle">Material — FluorDB</title>
+  <link rel="stylesheet" href="static/css/style.css">
+  <script src="static/js/vendor/chart.umd.js"></script>
+  <script src="static/js/vendor/jszip.min.js"></script>
+  <script src="static/js/common.js"></script>
+</head>
+<body>
+  <nav>
+    <a href="index.html" class="nav-brand">
+      <div class="logo-mark"></div>
+      <span>DNA-AgNC <span class="accent">DB</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="library.html">Library</a>
+      <a href="spectra.html">Spectra Viewer</a>
+      <a href="data/materials.json" class="nav-pill">⬇ Export JSON</a>
+    </div>
+  </nav>
+
+  <main id="mainContent">
+    <p class="muted">Loading…</p>
+  </main>
+
+  <footer>
+    DNA-AgNC DB — DNA-Stabilized Silver Nanocluster Database &nbsp;·&nbsp;
+    read-only public mirror &nbsp;·&nbsp; data published as static JSON
+  </footer>
+
+  <!-- Lightbox -->
+  <div id="lightbox" onclick="closeLightbox()">
+    <button id="lightbox-close" onclick="closeLightbox()">✕</button>
+    <img id="lightboxImg" src="" alt="">
+  </div>
+
+  <script>
+    let material = null;
+    let galleryImages = [];
+    let currentImg = 0;
+
+    function getSlug() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get('slug');
+    }
+
+    function propCell(label, value, big, color) {
+      const style = (big ? 'class="prop-value big"' : 'class="prop-value"') +
+                    (color ? ` style="color:${color};"` : '');
+      return `<div class="prop-cell"><div class="prop-label">${label}</div><div ${style}>${value}</div></div>`;
+    }
+
+    function render(m) {
+      document.getElementById('pageTitle').textContent = m.name + ' — FluorDB';
+
+      const imgs = m.images || [];
+      galleryImages = imgs;
+
+      const stokes = (m.absorption_max && m.emission_max) ? Math.round(m.emission_max - m.absorption_max) : null;
+      const brightness = (m.quantum_yield && m.extinction_coefficient) ? (m.quantum_yield * m.extinction_coefficient / 1000).toFixed(1) : null;
+
+      const hasSpectra = m.ab_spectrum || m.em_spectrum;
+
+      const galleryHTML = imgs.length ? `
+        <div class="gallery-body">
+          <div class="gallery-img-wrap">
+            <img id="galleryImg" src="static/img/${imgs[0]}" alt="Image 1" onclick="openLightbox(currentImg)">
+            ${imgs.length > 1 ? `
+              <button class="gallery-arrow prev" onclick="moveGallery(-1)">‹</button>
+              <button class="gallery-arrow next" onclick="moveGallery(1)">›</button>` : ''}
+            <span class="gallery-counter" id="galleryCounter">1 / ${imgs.length}</span>
+          </div>
+          ${imgs.length > 1 ? `
+          <div class="gallery-dots" id="galleryDots">
+            ${imgs.map((_, i) => `<div class="gallery-dot ${i === 0 ? 'active' : ''}" onclick="goToImage(${i})"></div>`).join('')}
+          </div>` : ''}
+        </div>` : `<div class="gallery-empty">No images available for this cluster.</div>`;
+
+      document.getElementById('mainContent').innerHTML = `
+        <div class="detail-header">
+          <div class="breadcrumb"><a href="index.html">Home</a> / <a href="library.html">Library</a> / ${m.name}</div>
+          <h1>${m.name}</h1>
+          <div class="sub">
+            ${m.cluster_size ? `<span class="tag tag-cat">Ag<sub>${m.cluster_size}</sub></span>` : ''}
+            <span style="color:var(--text-dim);">ID: ${m.id}</span>
+          </div>
+        </div>
+
+        <div class="actions-row">
+          <a href="data/materials/${m.slug}.json" class="btn btn-ghost">{ } JSON</a>
+          ${hasSpectra ? `<button class="btn btn-ghost" onclick="downloadSpectraZip()">⬇ Spectra ZIP</button>` : ''}
+        </div>
+
+        <div class="detail-grid">
+          <div>
+            ${m.description ? `<div class="description-block">${m.description}</div>` : ''}
+            ${m.dna_sequence ? `
+              <div class="dna-block">
+                <div class="dna-label">DNA Scaffold Sequence (5'→3')</div>
+                ${m.dna_sequence}
+              </div>` : ''}
+
+            <div class="props-grid">
+              ${propCell('Absorption max', m.absorption_max ? `${Math.round(m.absorption_max)} <span style="font-size:0.65em;opacity:0.6;">nm</span>` : '—', true, nmColor(m.absorption_max))}
+              ${propCell('Emission max', m.emission_max ? `${Math.round(m.emission_max)} <span style="font-size:0.65em;opacity:0.6;">nm</span>` : '—', true, nmColor(m.emission_max))}
+              ${propCell('Cluster Size', m.cluster_size ? `Ag<sub>${m.cluster_size}</sub> (${m.cluster_size} atoms)` : '—')}
+              ${propCell('Stokes Shift', stokes != null ? `${stokes} <span style="font-size:0.7em;opacity:0.5;">nm</span>` : '—')}
+              ${propCell('Quantum Yield (Φ)', m.quantum_yield != null ? m.quantum_yield.toFixed(3) : '—', false, m.quantum_yield != null ? 'var(--accent)' : null)}
+              ${propCell('Extinction Coeff. (ε)', m.extinction_coefficient != null ? `${Math.round(m.extinction_coefficient).toLocaleString('en-US')} <span style="font-size:0.65em;opacity:0.5;">M⁻¹cm⁻¹</span>` : '—')}
+              ${propCell('Brightness (ε·Φ/1000)', brightness != null ? brightness : '—')}
+              ${propCell('Fluorescence Lifetime', m.lifetime_ns != null ? `${m.lifetime_ns} <span style="font-size:0.7em;opacity:0.5;">ns</span>` : '—')}
+              ${propCell('Solvent / Matrix', m.solvent || '—')}
+              ${propCell('Mass Formula (MS)', m.mass_formula || '—')}
+            </div>
+
+            ${hasSpectra ? `
+            <div class="chart-card detail">
+              <h3>Absorption &amp; Emission Spectra</h3>
+              <div class="chart-container detail"><canvas id="spectrumChart"></canvas></div>
+            </div>` : ''}
+
+            ${m.notes ? `
+            <div class="sidebar-card">
+              <h3>Notes</h3>
+              <p style="font-size:0.84rem; color:var(--text-muted); line-height:1.7;">${m.notes}</p>
+            </div>` : ''}
+          </div>
+
+          <aside>
+            <div class="gallery-card">
+              <div class="gallery-header"><span>Images</span></div>
+              ${galleryHTML}
+            </div>
+
+            <div class="sidebar-card">
+              <h3>References</h3>
+              ${m.reference ? `<div class="meta-row"><span class="meta-key">Citation</span><span class="meta-val">${m.reference}</span></div>` : ''}
+              ${m.doi ? `<div class="meta-row"><span class="meta-key">DOI</span><span class="meta-val"><a href="https://doi.org/${m.doi}" target="_blank" style="color:var(--accent);font-size:0.76rem;">${m.doi}</a></span></div>` : ''}
+              ${(!m.reference && !m.doi) ? `<div style="color:var(--text-dim);font-size:0.78rem;">No references added.</div>` : ''}
+            </div>
+
+            <div class="sidebar-card">
+              <h3>Record</h3>
+              <div class="meta-row"><span class="meta-key">ID</span><span class="meta-val">${m.id}</span></div>
+              <div class="meta-row"><span class="meta-key">Slug</span><span class="meta-val">${m.slug}</span></div>
+              <div class="meta-row"><span class="meta-key">Added</span><span class="meta-val">${(m.created_at || '').slice(0, 10)}</span></div>
+              <div class="meta-row"><span class="meta-key">Updated</span><span class="meta-val">${(m.updated_at || '').slice(0, 10)}</span></div>
+            </div>
+
+            ${hasSpectra ? `
+            <div class="sidebar-card">
+              <h3>Spectrum Points</h3>
+              ${m.ab_spectrum ? `<div class="meta-row"><span class="meta-key">Absorption</span><span class="meta-val" style="color:var(--accent);">${m.ab_spectrum.length} pts</span></div>` : ''}
+              ${m.em_spectrum ? `<div class="meta-row"><span class="meta-key">Emission</span><span class="meta-val" style="color:var(--accent);">${m.em_spectrum.length} pts</span></div>` : ''}
+            </div>` : ''}
+          </aside>
+        </div>
+      `;
+
+      if (hasSpectra) buildSpectrumChart(m);
+    }
+
+    function buildSpectrumChart(m) {
+      const abData = toSortedXY(m.ab_spectrum);
+      const emData = toSortedXY(m.em_spectrum);
+      const abColor = nmColor(m.absorption_max);
+      const emColor = nmColor(m.emission_max);
+      const allWl = [];
+      if (abData) abData.forEach(p => allWl.push(p.x));
+      if (emData) emData.forEach(p => allWl.push(p.x));
+      const xMin = allWl.length ? Math.min(...allWl) - 10 : 350;
+      const xMax = allWl.length ? Math.max(...allWl) + 10 : 800;
+
+      const datasets = [];
+      if (abData) datasets.push({ label:'Absorption', data:abData, borderColor:abColor, backgroundColor:abColor+'20', fill:true, tension:0.4, borderWidth:2, borderDash:[5,3], pointRadius:0 });
+      if (emData) datasets.push({ label:'Emission', data:emData, borderColor:emColor, backgroundColor:emColor+'25', fill:true, tension:0.4, borderWidth:2, pointRadius:0 });
+
+      let cursorX = null;
+      const crosshairPlugin = {
+        id: 'crosshair',
+        afterDraw(chart) {
+          if (cursorX === null) return;
+          const ca = chart.chartArea, ctx = chart.ctx;
+          const xScale = chart.scales.x, yScale = chart.scales.y;
+          const dataX = xScale.getValueForPixel(cursorX);
+          if (dataX < xScale.min || dataX > xScale.max) return;
+          ctx.save();
+          ctx.beginPath(); ctx.moveTo(cursorX, ca.top); ctx.lineTo(cursorX, ca.bottom);
+          ctx.strokeStyle = 'rgba(255,255,255,0.18)'; ctx.lineWidth = 1;
+          ctx.setLineDash([4,4]); ctx.stroke(); ctx.setLineDash([]); ctx.restore();
+          chart.data.datasets.forEach(ds => {
+            const yV = interpY(ds.data, dataX);
+            if (yV === null) return;
+            const yPx = yScale.getPixelForValue(yV);
+            if (yPx < ca.top || yPx > ca.bottom) return;
+            ctx.save();
+            ctx.beginPath(); ctx.arc(cursorX, yPx, 3.5, 0, Math.PI*2);
+            ctx.fillStyle = '#ffffff'; ctx.strokeStyle = '#000000'; ctx.lineWidth = 1.5;
+            ctx.fill(); ctx.stroke(); ctx.restore();
+          });
+        }
+      };
+
+      const chart = new Chart(document.getElementById('spectrumChart'), {
+        type: 'line', data: { datasets },
+        plugins: [crosshairPlugin],
+        options: {
+          responsive: true, maintainAspectRatio: false, animation: false,
+          interaction: { mode: 'none' },
+          plugins: {
+            legend: { labels: { color:'#6b7585', font:{family:'DM Mono',size:11}, boxWidth:18 } },
+            tooltip: { enabled: false }
+          },
+          scales: {
+            x: { type:'linear', min:xMin, max:xMax, title:{display:true,text:'Wavelength (nm)',color:'#6b7585',font:{family:'DM Mono',size:11}}, grid:{color:'#1f2530'}, ticks:{color:'#6b7585',font:{family:'DM Mono',size:10}} },
+            y: { min:0, max:1.05, title:{display:true,text:'Normalized Intensity',color:'#6b7585',font:{family:'DM Mono',size:11}}, grid:{color:'#1f2530'}, ticks:{color:'#6b7585',font:{family:'DM Mono',size:10}} }
+          }
+        }
+      });
+
+      const ttEl = document.createElement('div');
+      ttEl.style.cssText = "position:absolute;pointer-events:none;opacity:0;transition:opacity 0.1s;background:#111318;border:1px solid #2a3140;border-radius:5px;padding:7px 11px;font-family:'DM Mono',monospace;font-size:11px;color:#6b7585;white-space:nowrap;z-index:100;";
+      const wrap = document.getElementById('spectrumChart').parentNode;
+      wrap.style.position = 'relative';
+      wrap.appendChild(ttEl);
+
+      const canvas = document.getElementById('spectrumChart');
+      canvas.addEventListener('mousemove', function(e) {
+        const rect = this.getBoundingClientRect();
+        const cssX = e.clientX - rect.left;
+        const cssY = e.clientY - rect.top;
+        const ca = chart.chartArea;
+        if (!ca || cssX < ca.left || cssX > ca.right) {
+          cursorX = null; ttEl.style.opacity = '0'; chart.render(); return;
+        }
+        cursorX = cssX;
+        const dataX = chart.scales.x.getValueForPixel(cssX);
+        const rows = [];
+        chart.data.datasets.forEach(ds => {
+          const yV = interpY(ds.data, dataX);
+          if (yV !== null) rows.push({ label: ds.label, color: ds.borderColor, y: yV });
+        });
+        if (rows.length) {
+          let html = `<div style="color:#e8eaf0;font-weight:500;margin-bottom:4px;">${dataX.toFixed(1)} nm</div>`;
+          rows.forEach(r => { html += `<div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;"><span style="display:inline-block;width:9px;height:9px;border-radius:2px;background:${r.color};flex-shrink:0;"></span><span>${r.label}: ${r.y.toFixed(3)}</span></div>`; });
+          ttEl.innerHTML = html; ttEl.style.opacity = '1';
+          const ttW = ttEl.offsetWidth || 160, canW = this.offsetWidth;
+          ttEl.style.left = ((cssX + 13 + ttW > canW) ? cssX - ttW - 13 : cssX + 13) + 'px';
+          ttEl.style.top = (cssY - 10) + 'px';
+        } else { ttEl.style.opacity = '0'; }
+        chart.render();
+      });
+      canvas.addEventListener('mouseleave', function() {
+        cursorX = null; ttEl.style.opacity = '0'; chart.render();
+      });
+    }
+
+    function goToImage(idx) {
+      if (!galleryImages.length) return;
+      currentImg = (idx + galleryImages.length) % galleryImages.length;
+      const imgEl = document.getElementById('galleryImg');
+      const counter = document.getElementById('galleryCounter');
+      const dots = document.querySelectorAll('.gallery-dot');
+      if (imgEl) { imgEl.style.opacity = '0.4'; setTimeout(() => { imgEl.src = 'static/img/' + galleryImages[currentImg]; imgEl.style.opacity = '1'; }, 120); }
+      if (counter) counter.textContent = `${currentImg + 1} / ${galleryImages.length}`;
+      dots.forEach((d, i) => d.classList.toggle('active', i === currentImg));
+    }
+    function moveGallery(dir) { goToImage(currentImg + dir); }
+    function openLightbox(idx) { document.getElementById('lightboxImg').src = 'static/img/' + galleryImages[idx]; document.getElementById('lightbox').classList.add('open'); }
+    function closeLightbox() { document.getElementById('lightbox').classList.remove('open'); }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+    /** Build the absorption/emission CSV zip entirely client-side via JSZip. */
+    async function downloadSpectraZip() {
+      const base = safeFilenameBase(material.name);
+      const zip = new JSZip();
+      if (material.ab_spectrum) {
+        const csv = 'wavelength,intensity\n' + material.ab_spectrum.map(p => `${p[0]},${p[1]}`).join('\n');
+        zip.file(`${base}_absorption.csv`, csv);
+      }
+      if (material.em_spectrum) {
+        const csv = 'wavelength,intensity\n' + material.em_spectrum.map(p => `${p[0]},${p[1]}`).join('\n');
+        zip.file(`${base}_emission.csv`, csv);
+      }
+      const blob = await zip.generateAsync({ type: 'blob' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${base}_spectra.zip`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    async function init() {
+      const slug = getSlug();
+      if (!slug) {
+        document.getElementById('mainContent').innerHTML = '<p class="muted">No material specified.</p>';
+        return;
+      }
+      try {
+        material = await fetchJSON(`data/materials/${slug}.json`);
+      } catch (e) {
+        // Fallback: filter from the full catalog if the per-material file is missing
+        const all = await fetchJSON('data/materials.json');
+        material = all.find(m => m.slug === slug);
+      }
+      if (!material) {
+        document.getElementById('mainContent').innerHTML = '<p class="muted">Material not found.</p>';
+        return;
+      }
+      render(material);
+    }
+    init();
+  </script>
+</body>
+</html>

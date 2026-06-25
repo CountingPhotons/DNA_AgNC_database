@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spectra Viewer — FluorDB</title>
+  <link rel="stylesheet" href="static/css/style.css">
+  <script src="static/js/vendor/chart.umd.js"></script>
+  <script src="static/js/common.js"></script>
+</head>
+<body>
+  <nav>
+    <a href="index.html" class="nav-brand">
+      <div class="logo-mark"></div>
+      <span>DNA-AgNC <span class="accent">DB</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="library.html">Library</a>
+      <a href="spectra.html" class="active">Spectra Viewer</a>
+      <a href="data/materials.json" class="nav-pill">⬇ Export JSON</a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="viewer-header">
+      <h1>Spectra Viewer</h1>
+      <p class="muted" style="font-size:0.84rem;">Overlay absorption &amp; emission spectra for multiple clusters.</p>
+    </div>
+
+    <div id="emptyMsg" class="empty-msg" style="display:none;">No spectra data found.</div>
+
+    <div id="viewerLayout" class="viewer-layout" style="display:none;">
+      <div>
+        <div class="material-list" id="materialList">
+          <div class="material-list-header">Select Materials</div>
+        </div>
+        <div class="btn-row">
+          <button onclick="selectAll()" class="btn btn-ghost btn-sm">Select All</button>
+          <button onclick="clearAll()" class="btn btn-ghost btn-sm">Clear</button>
+        </div>
+      </div>
+
+      <div class="chart-card viewer">
+        <div class="type-toggle-row">
+          <label>Show:</label>
+          <div class="toggle-group">
+            <button class="toggle-btn active" id="btn-show-abs" onclick="setTypeVis('abs')">Absorption</button>
+            <button class="toggle-btn active-em" id="btn-show-em" onclick="setTypeVis('em')">Emission</button>
+          </div>
+        </div>
+        <h3>Normalized Spectra</h3>
+        <div class="chart-container viewer">
+          <canvas id="spectraChart"></canvas>
+        </div>
+        <div style="margin-top:0.75rem;font-size:0.7rem;color:var(--text-dim);text-align:center;">
+          Dashed lines = absorption &nbsp;·&nbsp; Solid lines = emission
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    DNA-AgNC DB — DNA-Stabilized Silver Nanocluster Database &nbsp;·&nbsp;
+    read-only public mirror &nbsp;·&nbsp; data published as static JSON
+  </footer>
+
+  <script>
+    let materialsData = [];
+    const PALETTE_HUES = [200, 30, 130, 280, 60, 170, 340, 90, 240, 10, 160, 310];
+    let materialColors = {};
+    const active = new Set();
+    let showAbs = true, showEm = true;
+    let chart, cursorCssX = null, tooltipEl;
+
+    const crosshairPlugin = {
+      id: 'crosshair',
+      afterDraw(chart) {
+        if (cursorCssX === null) return;
+        const ca = chart.chartArea, ctx = chart.ctx;
+        const xScale = chart.scales.x, yScale = chart.scales.y;
+        const dataX = xScale.getValueForPixel(cursorCssX);
+        if (dataX < xScale.min || dataX > xScale.max) return;
+        ctx.save();
+        ctx.beginPath();
+        ctx.moveTo(cursorCssX, ca.top);
+        ctx.lineTo(cursorCssX, ca.bottom);
+        ctx.strokeStyle = 'rgba(255,255,255,0.18)';
+        ctx.lineWidth = 1; ctx.setLineDash([4,4]);
+        ctx.stroke(); ctx.setLineDash([]); ctx.restore();
+        chart.data.datasets.forEach(ds => {
+          const yV = interpY(ds.data, dataX);
+          if (yV === null) return;
+          const yPx = yScale.getPixelForValue(yV);
+          if (yPx < ca.top || yPx > ca.bottom) return;
+          ctx.save();
+          ctx.beginPath(); ctx.arc(cursorCssX, yPx, 3.5, 0, Math.PI*2);
+          ctx.fillStyle = '#ffffff'; ctx.strokeStyle = '#000000'; ctx.lineWidth = 1.5;
+          ctx.fill(); ctx.stroke(); ctx.restore();
+        });
+      }
+    };
+
+    function buildDatasets() {
+      const datasets = [];
+      const allWl = [];
+      materialsData.forEach(m => {
+        if (!active.has(m.slug)) return;
+        const c = materialColors[m.slug];
+        if (showAbs && m.ab_spectrum) {
+          const pts = toSortedXY(m.ab_spectrum);
+          pts.forEach(p => allWl.push(p.x));
+          datasets.push({ label:`${m.name} (Abs)`, data:pts, borderColor:c.solid, backgroundColor:c.fillAb, fill:true, tension:0.4, borderWidth:1.5, borderDash:[5,3], pointRadius:0 });
+        }
+        if (showEm && m.em_spectrum) {
+          const pts = toSortedXY(m.em_spectrum);
+          pts.forEach(p => allWl.push(p.x));
+          datasets.push({ label:`${m.name} (Em)`, data:pts, borderColor:c.solid, backgroundColor:c.fill, fill:true, tension:0.4, borderWidth:2, pointRadius:0 });
+        }
+      });
+      if (allWl.length) {
+        chart.options.scales.x.min = Math.min(...allWl) - 15;
+        chart.options.scales.x.max = Math.max(...allWl) + 15;
+      } else {
+        chart.options.scales.x.min = 350;
+        chart.options.scales.x.max = 800;
+      }
+      chart.data.datasets = datasets;
+      chart.update();
+    }
+
+    function toggleMaterial(slug) {
+      const ch = document.getElementById('check-' + slug);
+      if (active.has(slug)) {
+        active.delete(slug);
+        ch.textContent = ''; ch.style.background = ''; ch.style.borderColor = 'var(--border2)';
+      } else {
+        active.add(slug);
+        const c = materialColors[slug];
+        ch.textContent = '✓'; ch.style.color = '#000'; ch.style.background = c.solid; ch.style.borderColor = c.solid;
+      }
+      buildDatasets();
+    }
+    function selectAll() {
+      materialsData.forEach(m => {
+        active.add(m.slug);
+        const c = materialColors[m.slug], ch = document.getElementById('check-' + m.slug);
+        ch.textContent = '✓'; ch.style.color = '#000'; ch.style.background = c.solid; ch.style.borderColor = c.solid;
+      });
+      buildDatasets();
+    }
+    function clearAll() {
+      materialsData.forEach(m => {
+        active.delete(m.slug);
+        const ch = document.getElementById('check-' + m.slug);
+        ch.textContent = ''; ch.style.background = ''; ch.style.borderColor = 'var(--border2)';
+      });
+      buildDatasets();
+    }
+    function setTypeVis(type) {
+      if (type === 'abs') {
+        showAbs = !showAbs;
+        const btn = document.getElementById('btn-show-abs');
+        btn.classList.toggle('active', showAbs);
+        if (!showAbs) btn.style.background = '';
+      } else {
+        showEm = !showEm;
+        const btn = document.getElementById('btn-show-em');
+        btn.classList.toggle('active-em', showEm);
+        if (!showEm) btn.style.background = '';
+      }
+      buildDatasets();
+    }
+
+    async function init() {
+      const all = await fetchJSON('data/materials.json');
+      materialsData = all.filter(m => m.ab_spectrum || m.em_spectrum);
+
+      if (!materialsData.length) {
+        document.getElementById('emptyMsg').style.display = 'block';
+        return;
+      }
+      document.getElementById('viewerLayout').style.display = 'grid';
+
+      materialsData.forEach((m, i) => {
+        const h = PALETTE_HUES[i % PALETTE_HUES.length];
+        materialColors[m.slug] = {
+          solid: `hsl(${h},85%,62%)`,
+          fill: `hsla(${h},85%,62%,0.12)`,
+          fillAb: `hsla(${h},85%,62%,0.07)`,
+        };
+      });
+
+      const listEl = document.getElementById('materialList');
+      materialsData.forEach(m => {
+        const wl = [
+          m.absorption_max ? `Abs ${Math.round(m.absorption_max)}` : '',
+          (m.absorption_max && m.emission_max) ? ' · ' : '',
+          m.emission_max ? `Em ${Math.round(m.emission_max)} nm` : ''
+        ].join('');
+        const div = document.createElement('div');
+        div.className = 'material-item';
+        div.id = 'item-' + m.slug;
+        div.onclick = () => toggleMaterial(m.slug);
+        div.innerHTML = `
+          <div class="item-check" id="check-${m.slug}"></div>
+          <div class="item-color-bar" id="bar-${m.slug}" style="background:${materialColors[m.slug].solid};"></div>
+          <div class="item-info">
+            <div class="item-name">${m.name}</div>
+            <div class="item-wavelengths">${wl}</div>
+          </div>`;
+        listEl.appendChild(div);
+      });
+
+      chart = new Chart(document.getElementById('spectraChart').getContext('2d'), {
+        type: 'line',
+        data: { datasets: [] },
+        plugins: [crosshairPlugin],
+        options: {
+          responsive: true, maintainAspectRatio: false, animation: false,
+          interaction: { mode: 'none' },
+          plugins: {
+            legend: { labels: { color:'#6b7585', font:{family:'DM Mono',size:10}, boxWidth:20, padding:10 } },
+            tooltip: { enabled: false }
+          },
+          scales: {
+            x: { type:'linear', title:{display:true,text:'Wavelength (nm)',color:'#6b7585',font:{family:'DM Mono',size:11}}, grid:{color:'#1f2530'}, ticks:{color:'#6b7585',font:{family:'DM Mono',size:10}} },
+            y: { min:0, max:1.05, title:{display:true,text:'Normalized Intensity',color:'#6b7585',font:{family:'DM Mono',size:11}}, grid:{color:'#1f2530'}, ticks:{color:'#6b7585',font:{family:'DM Mono',size:10}} }
+          }
+        }
+      });
+
+      tooltipEl = document.createElement('div');
+      tooltipEl.style.cssText = 'position:absolute;pointer-events:none;opacity:0;transition:opacity 0.1s;background:#111318;border:1px solid #2a3140;border-radius:5px;padding:8px 12px;font-family:\'DM Mono\',monospace;font-size:11px;color:#6b7585;white-space:nowrap;z-index:100;';
+      const chartWrap = document.getElementById('spectraChart').parentNode;
+      chartWrap.style.position = 'relative';
+      chartWrap.appendChild(tooltipEl);
+
+      document.getElementById('spectraChart').addEventListener('mousemove', function(e) {
+        const rect = this.getBoundingClientRect();
+        const cssX = e.clientX - rect.left;
+        const cssY = e.clientY - rect.top;
+        cursorCssX = cssX;
+        const ca = chart.chartArea;
+        if (!ca || cssX < ca.left || cssX > ca.right) {
+          cursorCssX = null; tooltipEl.style.opacity = '0'; chart.render(); return;
+        }
+        const dataX = chart.scales.x.getValueForPixel(cssX);
+        const rows = [];
+        chart.data.datasets.forEach(ds => {
+          const yV = interpY(ds.data, dataX);
+          if (yV !== null) rows.push({ label: ds.label, color: ds.borderColor, y: yV });
+        });
+        if (rows.length) {
+          let html = `<div style="color:#e8eaf0;font-weight:500;margin-bottom:5px;">${dataX.toFixed(1)} nm</div>`;
+          rows.forEach(r => { html += `<div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;"><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:${r.color};flex-shrink:0;"></span><span>${r.label}: ${r.y.toFixed(3)}</span></div>`; });
+          tooltipEl.innerHTML = html; tooltipEl.style.opacity = '1';
+          const ttW = tooltipEl.offsetWidth || 180, canW = this.offsetWidth;
+          const left = (cssX + 14 + ttW > canW) ? cssX - ttW - 14 : cssX + 14;
+          tooltipEl.style.left = left + 'px';
+          tooltipEl.style.top = (cssY - 10) + 'px';
+        } else { tooltipEl.style.opacity = '0'; }
+        chart.render();
+      });
+      document.getElementById('spectraChart').addEventListener('mouseleave', function() {
+        cursorCssX = null; tooltipEl.style.opacity = '0'; chart.render();
+      });
+    }
+
+    init();
+  </script>
+</body>
+</html>

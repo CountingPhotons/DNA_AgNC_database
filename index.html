@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FluorDB — DNA-AgNC Library</title>
+  <link rel="stylesheet" href="static/css/style.css">
+  <script src="static/js/vendor/chart.umd.js"></script>
+  <script src="static/js/common.js"></script>
+</head>
+<body>
+  <nav>
+    <a href="index.html" class="nav-brand">
+      <div class="logo-mark"></div>
+      <span>DNA-AgNC <span class="accent">DB</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" class="active">Home</a>
+      <a href="library.html">Library</a>
+      <a href="spectra.html">Spectra Viewer</a>
+      <a href="data/materials.json" class="nav-pill">⬇ Export JSON</a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="hero">
+      <div class="hero-eyebrow">DNA-Stabilized Silver Nanoclusters</div>
+      <h1 class="hero-title"><span class="gradient">Nanocluster</span> Database</h1>
+      <p class="hero-sub">Catalog, search, and visualize data of DNA-AgNC's.<br><span id="clusterCount">…</span> characterized.</p>
+      <div class="hero-actions">
+        <a href="library.html" class="btn btn-primary">Browse Library →</a>
+        <a href="spectra.html" class="btn btn-ghost">Spectra Viewer →</a>
+      </div>
+    </div>
+
+    <div id="chartSection" style="display:none;">
+      <div class="chart-card">
+        <div class="chart-top">
+          <div class="chart-title" id="chartTitle">Emission vs. Absorption λmax</div>
+          <div class="axis-toggle">
+            <label>X axis:</label>
+            <div class="toggle-group">
+              <button class="toggle-btn active" id="btn-abs" onclick="setXAxis('absorption')">Absorption λ</button>
+              <button class="toggle-btn" id="btn-size" onclick="setXAxis('cluster_size')">Cluster Size</button>
+            </div>
+          </div>
+        </div>
+        <div class="chart-container">
+          <canvas id="scatterChart"></canvas>
+        </div>
+        <div class="chart-hint">↑ click any point to open its characterization page</div>
+      </div>
+    </div>
+
+    <div id="emptyState" class="empty-state" style="display:none;">
+      <div class="big">🧬</div>
+      <p>No materials with spectral data yet.</p>
+    </div>
+  </main>
+
+  <footer>
+    DNA-AgNC DB — DNA-Stabilized Silver Nanocluster Database &nbsp;·&nbsp;
+    read-only public mirror &nbsp;·&nbsp; data published as static JSON
+  </footer>
+
+  <script>
+    let chart, plotData = [];
+
+    function buildDatasets(mode) {
+      return plotData
+        .filter(m => mode === 'absorption' ? m.absorption_max != null : m.cluster_size != null)
+        .map(m => {
+          const xVal = mode === 'absorption' ? m.absorption_max : m.cluster_size;
+          const emC = nmColorVivid(m.emission_max);
+          return {
+            label: m.name,
+            data: [{ x: xVal, y: m.emission_max, slug: m.slug, name: m.name,
+                      abs: m.absorption_max, em: m.emission_max, size: m.cluster_size }],
+            backgroundColor: emC + 'bb',
+            borderColor: emC,
+            borderWidth: 2,
+            pointRadius: 10,
+            pointHoverRadius: 14,
+          };
+        });
+    }
+
+    function getBounds(mode) {
+      const xVals = plotData.map(m => mode === 'absorption' ? m.absorption_max : m.cluster_size).filter(v => v != null);
+      const yVals = plotData.map(m => m.emission_max).filter(v => v != null);
+      if (!xVals.length || !yVals.length) return { xMin:0, xMax:10, yMin:400, yMax:900 };
+      const xPad = mode === 'absorption' ? 20 : 1;
+      return {
+        xMin: Math.min(...xVals) - xPad, xMax: Math.max(...xVals) + xPad,
+        yMin: Math.min(...yVals) - 20, yMax: Math.max(...yVals) + 20,
+      };
+    }
+
+    function setXAxis(mode) {
+      document.getElementById('btn-abs').classList.toggle('active', mode === 'absorption');
+      document.getElementById('btn-size').classList.toggle('active', mode === 'cluster_size');
+      const isAbs = mode === 'absorption';
+      document.getElementById('chartTitle').textContent =
+        isAbs ? 'Emission vs. Absorption λmax' : 'Emission λmax vs. Cluster Size (N)';
+      const b = getBounds(mode);
+      chart.options.scales.x.min = b.xMin;
+      chart.options.scales.x.max = b.xMax;
+      chart.options.scales.y.min = b.yMin;
+      chart.options.scales.y.max = b.yMax;
+      chart.options.scales.x.title.text = isAbs ? 'Absorption λmax (nm)' : 'Cluster Size N (Ag atoms)';
+      chart.data.datasets = buildDatasets(mode);
+      chart.update();
+    }
+
+    async function init() {
+      const materials = await fetchJSON('data/materials.json');
+      document.getElementById('clusterCount').textContent =
+        `${materials.length} cluster${materials.length !== 1 ? 's' : ''}`;
+
+      plotData = materials.filter(m => m.absorption_max && m.emission_max);
+
+      if (!plotData.length) {
+        document.getElementById('emptyState').style.display = 'block';
+        return;
+      }
+      document.getElementById('chartSection').style.display = 'block';
+
+      const initB = getBounds('absorption');
+      chart = new Chart(document.getElementById('scatterChart').getContext('2d'), {
+        type: 'scatter',
+        data: { datasets: buildDatasets('absorption') },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              backgroundColor: '#111318', borderColor: '#2a3140', borderWidth: 1,
+              titleColor: '#e8eaf0', bodyColor: '#6b7585',
+              titleFont: { family: 'DM Mono', size: 12, weight: '500' },
+              bodyFont: { family: 'DM Mono', size: 11 },
+              callbacks: {
+                title: items => items[0].raw.name,
+                label: item => {
+                  const d = item.raw;
+                  const lines = [`Em:  ${d.em} nm`];
+                  if (d.abs != null) lines.push(`Abs: ${d.abs} nm`);
+                  if (d.size != null) lines.push(`Ag${d.size} cluster`);
+                  return lines;
+                }
+              }
+            }
+          },
+          scales: {
+            x: { min: initB.xMin, max: initB.xMax,
+                 title: { display: true, text: 'Absorption λmax (nm)', color: '#6b7585', font: { family: 'DM Mono', size: 11 } },
+                 grid: { color: '#1f2530' }, ticks: { color: '#6b7585', font: { family: 'DM Mono', size: 10 } } },
+            y: { min: initB.yMin, max: initB.yMax,
+                 title: { display: true, text: 'Emission λmax (nm)', color: '#6b7585', font: { family: 'DM Mono', size: 11 } },
+                 grid: { color: '#1f2530' }, ticks: { color: '#6b7585', font: { family: 'DM Mono', size: 10 } } }
+          },
+          onClick(event, elements) {
+            if (elements.length > 0) {
+              const slug = chart.data.datasets[elements[0].datasetIndex].data[0].slug;
+              window.location.href = 'material.html?slug=' + encodeURIComponent(slug);
+            }
+          },
+          onHover(event, elements) {
+            event.native.target.style.cursor = elements.length ? 'pointer' : 'default';
+          }
+        }
+      });
+    }
+
+    init();
+  </script>
+</body>
+</html>
