@@ -22,7 +22,7 @@
       <a href="index.html">Home</a>
       <a href="library.html" class="active">Library</a>
       <a href="spectra.html">Spectra Viewer</a>
-      <a href="data/materials.json" class="nav-pill">⬇ Export JSON</a>
+      <a href="https://huggingface.co/spaces/CoppLab/NucleoSpec" target="_blank" class="nav-pill">Mass Spec Analysis</a>
     </div>
   </nav>
 
@@ -40,7 +40,7 @@
     </div>
 
     <div class="count-label">
-      Showing <span id="countNum">0</span> cluster<span id="countPlural">s</span>
+      Showing <span id="countNum" class="count-num">0</span> cluster<span id="countPlural">s</span>
     </div>
 
     <div class="table-wrap">
@@ -49,19 +49,19 @@
           <tr>
             <th class="sortable" data-sort="name">Name <span class="sort-arrow">⇅</span></th>
             <th class="sortable" data-sort="dna_sequence">DNA Sequence <span class="sort-arrow">⇅</span></th>
-            <th class="sortable" data-sort="cluster_size">Cluster Size <span class="sort-arrow">⇅</span></th>
+            <th class="sortable" data-sort="cluster_size">Cluster Size (N) <span class="sort-arrow">⇅</span></th>
+            <th class="sortable" data-sort="valence_number">Valence (N₀) <span class="sort-arrow">⇅</span></th>
             <th class="sortable" data-sort="structure_solved" style="text-align:center;">Structure <span class="sort-arrow">⇅</span></th>
             <th class="sortable" data-sort="absorption_max">Abs max [nm] <span class="sort-arrow">⇅</span></th>
             <th class="sortable" data-sort="emission_max">Em max [nm] <span class="sort-arrow">⇅</span></th>
-            <th>Lifetime</th>
+            <th>Short-lived (ns)</th>
+            <th>Long-lived (us)</th>
             <th class="sortable" data-sort="quantum_yield">Quantum Yield <span class="sort-arrow">⇅</span></th>
-            <th class="sortable" data-sort="extinction_coefficient">ε [M⁻¹cm⁻¹] <span class="sort-arrow">⇅</span></th>
             <th>Solvent</th>
-            <th></th>
           </tr>
         </thead>
         <tbody id="tableBody">
-          <tr class="empty-row"><td colspan="9">Loading…</td></tr>
+          <tr class="empty-row"><td colspan="11">Loading…</td></tr>
         </tbody>
       </table>
     </div>
@@ -129,6 +129,7 @@
       tbody.innerHTML = rows.map(m => {
         const seq = m.dna_sequence ? m.dna_sequence : '—';
         const cluster = m.cluster_size ? `Ag<sub>${m.cluster_size}</sub>` : '—';
+        const valence = (m.valence_number != null) ? m.valence_number : '—';
         const solved = m.structure_solved
           ? `<span style="color:var(--accent3); font-size:1.05rem;" title="Structure solved">✓</span>`
           : `<span style="color:var(--danger); font-size:1.05rem;" title="Structure not yet solved">✗</span>`;
@@ -139,9 +140,9 @@
           ? `<span class="color-swatch"><span class="swatch-dot" style="background:${nmColor(m.emission_max)};"></span>${Math.round(m.emission_max)}</span>` +
             (m.emission_max_2 ? ` <span style="opacity:0.4;">/</span> <span class="color-swatch"><span class="swatch-dot" style="background:${nmColor(m.emission_max_2)};"></span>${Math.round(m.emission_max_2)}</span>` : '')
           : '—';
-        const lifetime = lifetimeLabel(m);
+        const lifetimeNs = irfShort(m.lifetime_ns);
+        const lifetimeUs = irfShort(m.lifetime_us);
         const qy = m.quantum_yield != null ? m.quantum_yield.toFixed(3) : '—';
-        const ec = m.extinction_coefficient != null ? Math.round(m.extinction_coefficient).toLocaleString('en-US').replace(/,/g, '.') : '—';
         const solvent = m.solvent || '—';
         const slug = encodeURIComponent(m.slug);
         return `
@@ -149,16 +150,14 @@
             <td class="td-name"><a href="material.html?slug=${slug}">${m.name}</a></td>
             <td class="td-seq" title="${seq}">${seq}</td>
             <td>${cluster}</td>
+            <td>${valence}</td>
             <td style="text-align:center;">${solved}</td>
             <td>${abs}</td>
             <td>${em}</td>
-            <td style="font-size:0.82rem;">${lifetime}</td>
+            <td style="font-size:0.82rem;">${lifetimeNs}</td>
+            <td style="font-size:0.82rem;">${lifetimeUs}</td>
             <td>${qy}</td>
-            <td>${ec}</td>
             <td style="color:var(--text);">${solvent}</td>
-            <td class="actions-cell">
-              <a href="data/materials/${m.slug}.json" class="btn btn-ghost btn-sm" onclick="event.stopPropagation()">↓ JSON</a>
-            </td>
           </tr>`;
       }).join('');
     }

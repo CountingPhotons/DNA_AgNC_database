@@ -18,7 +18,7 @@
       <a href="index.html">Home</a>
       <a href="library.html">Library</a>
       <a href="spectra.html" class="active">Spectra Viewer</a>
-      <a href="data/materials.json" class="nav-pill">⬇ Export JSON</a>
+      <a href="https://huggingface.co/spaces/CoppLab/NucleoSpec" target="_blank" rel="noopener" class="nav-pill">Mass Spec Analysis</a>
     </div>
   </nav>
 
@@ -110,12 +110,12 @@
         if (showAbs && m.ab_spectrum) {
           const pts = toSortedXY(m.ab_spectrum);
           pts.forEach(p => allWl.push(p.x));
-          datasets.push({ label:`${m.name} (Abs)`, data:pts, borderColor:c.solid, backgroundColor:c.fillAb, fill:true, tension:0.4, borderWidth:1.5, borderDash:[5,3], pointRadius:0 });
+          datasets.push({ label:`${m.name} (Abs)`, slug:m.slug, data:pts, borderColor:c.solid, backgroundColor:c.fillAb, fill:true, tension:0.4, borderWidth:1.5, borderDash:[5,3], pointRadius:0 });
         }
         if (showEm && m.em_spectrum) {
           const pts = toSortedXY(m.em_spectrum);
           pts.forEach(p => allWl.push(p.x));
-          datasets.push({ label:`${m.name} (Em)`, data:pts, borderColor:c.solid, backgroundColor:c.fill, fill:true, tension:0.4, borderWidth:2, pointRadius:0 });
+          datasets.push({ label:`${m.name} (Em)`, slug:m.slug, data:pts, borderColor:c.solid, backgroundColor:c.fill, fill:true, tension:0.4, borderWidth:2, pointRadius:0 });
         }
       });
       if (allWl.length) {
@@ -220,12 +220,21 @@
           responsive: true, maintainAspectRatio: false, animation: false,
           interaction: { mode: 'none' },
           plugins: {
-            legend: { labels: { color:'#6b7585', font:{family:'DM Mono',size:10}, boxWidth:20, padding:10 } },
+            legend: {
+              labels: { color:'#6b7585', font:{family:'DM Mono',size:10}, boxWidth:20, padding:10 },
+              // Clicking a legend entry (e.g. "MLQ8 (Abs)") opens that
+              // cluster's page instead of the default toggle-visibility
+              // behavior — the checklist on the left already handles show/hide.
+              onClick: (e, legendItem, legend) => {
+                const ds = legend.chart.data.datasets[legendItem.datasetIndex];
+                if (ds && ds.slug) window.location.href = 'material.html?slug=' + encodeURIComponent(ds.slug);
+              }
+            },
             tooltip: { enabled: false }
           },
           scales: {
             x: { type:'linear', title:{display:true,text:'Wavelength (nm)',color:'#6b7585',font:{family:'DM Mono',size:11}}, grid:{color:'#1f2530'}, ticks:{color:'#6b7585',font:{family:'DM Mono',size:10}} },
-            y: { min:0, max:1.05, title:{display:true,text:'Normalized Intensity',color:'#6b7585',font:{family:'DM Mono',size:11}}, grid:{color:'#1f2530'}, ticks:{color:'#6b7585',font:{family:'DM Mono',size:10}} }
+            y: { min:0, max:1.0, title:{display:true,text:'Normalized Intensity',color:'#6b7585',font:{family:'DM Mono',size:11}}, grid:{color:'#1f2530'}, ticks:{stepSize:0.2,color:'#6b7585',font:{family:'DM Mono',size:10}} }
           }
         }
       });

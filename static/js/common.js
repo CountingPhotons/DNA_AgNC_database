@@ -84,28 +84,12 @@ function chemNotation(text) {
     .replace(/\^\{([^}]*)\}/g, '<sup>$1</sup>');
 }
 
-/**
- * Format a single lifetime value for compact table display:
- * - "IRF-limited" (any case) -> "IRF"
- * - a plain number -> "{value}{unit}", e.g. "5.2ns"
- * - any other free text -> shown as-is, no unit appended
- * Returns null if the value is empty.
- */
-function formatLifetimeComponent(value, unit) {
-  if (!value) return null;
+/** Shorten 'IRF-limited' (any case) to 'IRF'; leave everything else untouched. */
+function irfShort(value) {
+  if (!value) return '—';
   const v = String(value).trim();
   if (v.toLowerCase() === 'irf-limited' || v.toLowerCase() === 'irf') return 'IRF';
-  if (v !== '' && !isNaN(Number(v))) return `${v}${unit}`;
   return v;
-}
-
-/** Combine lifetime_ns + lifetime_us into one compact label, e.g. "5.2ns/60µs". */
-function lifetimeLabel(m) {
-  const parts = [
-    formatLifetimeComponent(m.lifetime_ns, 'ns'),
-    formatLifetimeComponent(m.lifetime_us, 'µs'),
-  ].filter(Boolean);
-  return parts.length ? parts.join('/') : '—';
 }
 
 /** Fetch JSON with a friendly error if the file is missing (helps local testing). */

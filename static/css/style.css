@@ -276,7 +276,7 @@ td { padding: 0.75rem 1rem; font-size: 0.84rem; vertical-align: middle; color: v
 .swatch-dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
 
 .count-label { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.6rem; }
-.count-label span { color: var(--accent); }
+.count-label .count-num { color: var(--accent); }
 .empty-row td { text-align: center; padding: 3rem; color: var(--text-muted); }
 .actions-cell { white-space: nowrap; }
 
@@ -331,7 +331,7 @@ td { padding: 0.75rem 1rem; font-size: 0.84rem; vertical-align: middle; color: v
   background: var(--surface); border: 1px solid var(--border);
   border-left: 3px solid var(--accent); border-radius: var(--radius);
   padding: 0.9rem 1.1rem; margin-bottom: 1.5rem;
-  font-size: 0.87rem; line-height: 1.7; color: var(--text-muted);
+  font-size: 0.87rem; line-height: 1.7; color: var(--text);
 }
 
 /* ============================================================
@@ -361,3 +361,19 @@ td { padding: 0.75rem 1rem; font-size: 0.84rem; vertical-align: middle; color: v
 .btn-row { display: flex; gap: 0.5rem; margin-top: 0.75rem; flex-wrap: wrap; }
 .empty-msg { padding: 3rem; text-align: center; color: var(--text-muted); font-size: 0.88rem; }
 .empty-msg a { color: var(--accent); }
+
+/* ── Family tree (scoped to a single cluster's lineage, on the detail page) ── */
+.family-tree-sub { font-size: 0.7rem; color: var(--text-dim); margin-bottom: 0.75rem; }
+.family-tree-scroll { overflow: auto; min-height: 80px; max-height: 360px; border-radius: var(--radius); background: #0d0f13; }
+.tree-node-label { font-family: var(--mono); font-size: 10px; fill: var(--text); }
+.tree-node-circle { stroke: #000; stroke-width: 1.5px; cursor: pointer; }
+.tree-node-circle:hover { stroke: var(--accent); stroke-width: 2.5px; }
+.tree-node-circle.current { cursor: default; }
+.tree-edge { stroke: var(--border2); stroke-width: 1.5px; fill: none; }
+.tree-empty { padding: 1.25rem 1rem; text-align: center; font-size: 0.78rem; color: var(--text-dim); }
+
+/* ── Reference header tag ── */
+.ref-header {
+  font-size: 0.66rem; font-weight: 500; color: var(--accent);
+  letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.3rem;
+}
