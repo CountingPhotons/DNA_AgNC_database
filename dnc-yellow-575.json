@@ -1,0 +1,97 @@
+{
+  "id": "i9j0k1l2",
+  "slug": "dnc-nir-780",
+  "name": "DNA-NC NIR-780",
+  "description": "Near-infrared silver nanocluster on a G-quadruplex-forming sequence.",
+  "dna_sequence": "GGGTAGGGCGGGTTGGG",
+  "cluster_size": 10,
+  "absorption_max": 740.0,
+  "emission_max": 780.0,
+  "quantum_yield": 0.18,
+  "extinction_coefficient": 200000.0,
+  "brightness": null,
+  "lifetime_ns": 5.2,
+  "solvent": "10 mM Tris pH 8.0 + 100 mM NaCl",
+  "reference": "Gwinn et al. (2008) Adv. Mater.",
+  "doi": "10.1002/adma.200800162",
+  "notes": "Requires monovalent salt for G-quadruplex folding. NIR window suitable for bioimaging.",
+  "ab_spectrum": [
+    [
+      660,
+      0.02
+    ],
+    [
+      680,
+      0.08
+    ],
+    [
+      700,
+      0.25
+    ],
+    [
+      720,
+      0.65
+    ],
+    [
+      740,
+      1.0
+    ],
+    [
+      755,
+      0.88
+    ],
+    [
+      770,
+      0.5
+    ],
+    [
+      785,
+      0.15
+    ],
+    [
+      800,
+      0.03
+    ]
+  ],
+  "em_spectrum": [
+    [
+      710,
+      0.01
+    ],
+    [
+      730,
+      0.08
+    ],
+    [
+      750,
+      0.35
+    ],
+    [
+      765,
+      0.72
+    ],
+    [
+      780,
+      1.0
+    ],
+    [
+      795,
+      0.82
+    ],
+    [
+      810,
+      0.48
+    ],
+    [
+      825,
+      0.18
+    ],
+    [
+      840,
+      0.04
+    ]
+  ],
+  "images": [],
+  "created_at": "2024-01-17T12:00:00",
+  "updated_at": "2024-01-17T12:00:00"
+}
