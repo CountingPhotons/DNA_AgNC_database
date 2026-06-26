@@ -32,15 +32,7 @@ is no server, no database engine, and no way to submit, edit, or delete
 entries through this site. It is rebuilt and re-published periodically
 from the working database maintained by the project team.
 
-**Spot an error, or have data to contribute?** Please contact
-[your name / email / lab contact] rather than opening a pull request —
-changes are made upstream and republished here.
-
 ## Citation
-
-If you use data from this database, please cite:
-
-> *(add your citation / paper / lab reference here)*
 
 ## Data license
 
