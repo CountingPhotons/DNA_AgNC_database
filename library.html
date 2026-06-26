@@ -6,6 +6,11 @@
   <title>Cluster Library — FluorDB</title>
   <link rel="stylesheet" href="static/css/style.css">
   <script src="static/js/common.js"></script>
+  <style>
+    /* This page has a wide table (11 columns) — give it more room than the
+       site's normal 1200px content width so it needs less internal scrolling. */
+    main { max-width: 1600px; }
+  </style>
 </head>
 <body>
   <nav>
@@ -48,6 +53,7 @@
             <th class="sortable" data-sort="structure_solved" style="text-align:center;">Structure <span class="sort-arrow">⇅</span></th>
             <th class="sortable" data-sort="absorption_max">Abs max [nm] <span class="sort-arrow">⇅</span></th>
             <th class="sortable" data-sort="emission_max">Em max [nm] <span class="sort-arrow">⇅</span></th>
+            <th>Lifetime</th>
             <th class="sortable" data-sort="quantum_yield">Quantum Yield <span class="sort-arrow">⇅</span></th>
             <th class="sortable" data-sort="extinction_coefficient">ε [M⁻¹cm⁻¹] <span class="sort-arrow">⇅</span></th>
             <th>Solvent</th>
@@ -117,7 +123,7 @@
     function renderRows(rows) {
       const tbody = document.getElementById('tableBody');
       if (!rows.length) {
-        tbody.innerHTML = `<tr class="empty-row"><td colspan="10">No materials found.</td></tr>`;
+        tbody.innerHTML = `<tr class="empty-row"><td colspan="11">No materials found.</td></tr>`;
         return;
       }
       tbody.innerHTML = rows.map(m => {
@@ -130,8 +136,10 @@
           ? `<span class="color-swatch"><span class="swatch-dot" style="background:${nmColor(m.absorption_max)};"></span>${Math.round(m.absorption_max)}</span>`
           : '—';
         const em = m.emission_max
-          ? `<span class="color-swatch"><span class="swatch-dot" style="background:${nmColor(m.emission_max)};"></span>${Math.round(m.emission_max)}</span>`
+          ? `<span class="color-swatch"><span class="swatch-dot" style="background:${nmColor(m.emission_max)};"></span>${Math.round(m.emission_max)}</span>` +
+            (m.emission_max_2 ? ` <span style="opacity:0.4;">/</span> <span class="color-swatch"><span class="swatch-dot" style="background:${nmColor(m.emission_max_2)};"></span>${Math.round(m.emission_max_2)}</span>` : '')
           : '—';
+        const lifetime = lifetimeLabel(m);
         const qy = m.quantum_yield != null ? m.quantum_yield.toFixed(3) : '—';
         const ec = m.extinction_coefficient != null ? Math.round(m.extinction_coefficient).toLocaleString('en-US').replace(/,/g, '.') : '—';
         const solvent = m.solvent || '—';
@@ -144,6 +152,7 @@
             <td style="text-align:center;">${solved}</td>
             <td>${abs}</td>
             <td>${em}</td>
+            <td style="font-size:0.82rem;">${lifetime}</td>
             <td>${qy}</td>
             <td>${ec}</td>
             <td style="color:var(--text);">${solvent}</td>

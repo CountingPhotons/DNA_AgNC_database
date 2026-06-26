@@ -32,16 +32,8 @@
     read-only public mirror &nbsp;·&nbsp; data published as static JSON
   </footer>
 
-  <!-- Lightbox -->
-  <div id="lightbox" onclick="closeLightbox()">
-    <button id="lightbox-close" onclick="closeLightbox()">✕</button>
-    <img id="lightboxImg" src="" alt="">
-  </div>
-
   <script>
     let material = null;
-    let galleryImages = [];
-    let currentImg = 0;
 
     function getSlug() {
       const params = new URLSearchParams(window.location.search);
@@ -57,9 +49,6 @@
     function render(m) {
       document.getElementById('pageTitle').textContent = m.name + ' — FluorDB';
 
-      const imgs = m.images || [];
-      galleryImages = imgs;
-
       const stokes = (m.absorption_max && m.emission_max) ? Math.round(m.emission_max - m.absorption_max) : null;
       const brightness = (m.quantum_yield && m.extinction_coefficient) ? (m.quantum_yield * m.extinction_coefficient / 1000).toFixed(1) : null;
 
@@ -71,21 +60,6 @@
       }
 
       const hasSpectra = m.ab_spectrum || m.em_spectrum;
-
-      const galleryHTML = imgs.length ? `
-        <div class="gallery-body">
-          <div class="gallery-img-wrap">
-            <img id="galleryImg" src="static/img/${imgs[0]}" alt="Image 1" onclick="openLightbox(currentImg)">
-            ${imgs.length > 1 ? `
-              <button class="gallery-arrow prev" onclick="moveGallery(-1)">‹</button>
-              <button class="gallery-arrow next" onclick="moveGallery(1)">›</button>` : ''}
-            <span class="gallery-counter" id="galleryCounter">1 / ${imgs.length}</span>
-          </div>
-          ${imgs.length > 1 ? `
-          <div class="gallery-dots" id="galleryDots">
-            ${imgs.map((_, i) => `<div class="gallery-dot ${i === 0 ? 'active' : ''}" onclick="goToImage(${i})"></div>`).join('')}
-          </div>` : ''}
-        </div>` : `<div class="gallery-empty">No images available for this cluster.</div>`;
 
       document.getElementById('mainContent').innerHTML = `
         <div class="detail-header">
@@ -140,11 +114,6 @@
           </div>
 
           <aside>
-            <div class="gallery-card">
-              <div class="gallery-header"><span>Images</span></div>
-              ${galleryHTML}
-            </div>
-
             <div class="sidebar-card">
               <h3>References</h3>
               ${m.reference ? `<div class="meta-row"><span class="meta-key">Citation</span><span class="meta-val">${m.reference}</span></div>` : ''}
@@ -258,21 +227,6 @@
         cursorX = null; ttEl.style.opacity = '0'; chart.render();
       });
     }
-
-    function goToImage(idx) {
-      if (!galleryImages.length) return;
-      currentImg = (idx + galleryImages.length) % galleryImages.length;
-      const imgEl = document.getElementById('galleryImg');
-      const counter = document.getElementById('galleryCounter');
-      const dots = document.querySelectorAll('.gallery-dot');
-      if (imgEl) { imgEl.style.opacity = '0.4'; setTimeout(() => { imgEl.src = 'static/img/' + galleryImages[currentImg]; imgEl.style.opacity = '1'; }, 120); }
-      if (counter) counter.textContent = `${currentImg + 1} / ${galleryImages.length}`;
-      dots.forEach((d, i) => d.classList.toggle('active', i === currentImg));
-    }
-    function moveGallery(dir) { goToImage(currentImg + dir); }
-    function openLightbox(idx) { document.getElementById('lightboxImg').src = 'static/img/' + galleryImages[idx]; document.getElementById('lightbox').classList.add('open'); }
-    function closeLightbox() { document.getElementById('lightbox').classList.remove('open'); }
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
 
     /** Build the absorption/emission CSV zip entirely client-side via JSZip. */
     async function downloadSpectraZip() {
