@@ -9,7 +9,7 @@
   "structure_solved": true,
   "pdb_link": "https://www.rcsb.org/structure/6JR4",
   "parent_slug": "",
-  "mass_formula": "C_{192}H_{244}N_{78}O_{112}P_{18}[Ag_{16}C_{l2}]^{8+}",
+  "mass_formula": "C_{192}H_{244}N_{78}O_{112}P_{18}[Ag_{16}Cl_{2}]^{8+}",
   "molecular_weight": "DNA_{2}-[Ag_{16}Cl_{2}]^{8+}",
   "absorption_max": 525.0,
   "emission_max": 735.0,
@@ -3755,7 +3755,7 @@
     ]
   ],
   "created_at": "2026-06-26T19:27:23.882154",
-  "updated_at": "2026-07-08T13:59:18.898839",
+  "updated_at": "2026-07-08T15:10:16.364780",
   "purification_method": "HPLC",
   "references": [
     {

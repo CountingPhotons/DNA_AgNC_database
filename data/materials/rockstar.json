@@ -9,7 +9,7 @@
   "structure_solved": false,
   "pdb_link": "",
   "parent_slug": "",
-  "mass_formula": "C_{273}H_{346}N_{99}O_{171}P_{27}[Ag15]^{9+}",
+  "mass_formula": "C_{273}H_{346}N_{99}O_{171}P_{27}[Ag_{15}]^{9+}",
   "molecular_weight": "DNA_{1}-[Ag_{15}]^{9+}",
   "absorption_max": 600.0,
   "emission_max": 670.0,
@@ -2715,7 +2715,7 @@
     ]
   ],
   "created_at": "2026-06-26T19:25:15.445996",
-  "updated_at": "2026-07-08T15:00:36.288375",
+  "updated_at": "2026-07-08T15:09:52.774192",
   "purification_method": "",
   "references": [
     {

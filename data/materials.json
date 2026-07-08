@@ -28482,7 +28482,7 @@
     "structure_solved": false,
     "pdb_link": "",
     "parent_slug": "",
-    "mass_formula": "C_{273}H_{346}N_{99}O_{171}P_{27}[Ag15]^{9+}",
+    "mass_formula": "C_{273}H_{346}N_{99}O_{171}P_{27}[Ag_{15}]^{9+}",
     "molecular_weight": "DNA_{1}-[Ag_{15}]^{9+}",
     "absorption_max": 600.0,
     "emission_max": 670.0,
@@ -31188,7 +31188,7 @@
       ]
     ],
     "created_at": "2026-06-26T19:25:15.445996",
-    "updated_at": "2026-07-08T15:00:36.288375",
+    "updated_at": "2026-07-08T15:09:52.774192",
     "purification_method": "",
     "references": [
       {
@@ -31209,7 +31209,7 @@
     "structure_solved": true,
     "pdb_link": "https://www.rcsb.org/structure/6JR4",
     "parent_slug": "",
-    "mass_formula": "C_{192}H_{244}N_{78}O_{112}P_{18}[Ag_{16}C_{l2}]^{8+}",
+    "mass_formula": "C_{192}H_{244}N_{78}O_{112}P_{18}[Ag_{16}Cl_{2}]^{8+}",
     "molecular_weight": "DNA_{2}-[Ag_{16}Cl_{2}]^{8+}",
     "absorption_max": 525.0,
     "emission_max": 735.0,
@@ -34955,7 +34955,7 @@
       ]
     ],
     "created_at": "2026-06-26T19:27:23.882154",
-    "updated_at": "2026-07-08T13:59:18.898839",
+    "updated_at": "2026-07-08T15:10:16.364780",
     "purification_method": "HPLC",
     "references": [
       {
@@ -45877,7 +45877,7 @@
     "structure_solved": true,
     "pdb_link": "https://www.rcsb.org/structure/7BSF",
     "parent_slug": "gg322",
-    "mass_formula": "C_{190}H_{242}N_{80}O_{110}P_{18}[Ag_{16}Cl_{2]^{8+}",
+    "mass_formula": "C_{190}H_{242}N_{80}O_{110}P_{18}[Ag_{16}Cl_{2}]^{8+}",
     "molecular_weight": "DNA_{2}-[Ag_{16}Cl_{2}]^{8+}",
     "absorption_max": 530.0,
     "emission_max": 735.0,
@@ -49423,7 +49423,7 @@
       ]
     ],
     "created_at": "2026-06-26T19:34:17.496710",
-    "updated_at": "2026-07-08T14:08:39.208155",
+    "updated_at": "2026-07-08T15:11:10.106860",
     "purification_method": "HPLC",
     "references": [
       {
