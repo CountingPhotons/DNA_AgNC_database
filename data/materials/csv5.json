@@ -9,8 +9,8 @@
   "structure_solved": false,
   "pdb_link": "",
   "parent_slug": "",
-  "mass_formula": "DNA_{2}-[Ag_{14}]^{8+}",
-  "molecular_weight": "6528.3",
+  "mass_formula": "C_{207}H_{269}N_{72}O_{132}P_{21}[Ag_{14}]^{8+}",
+  "molecular_weight": "DNA-[Ag_{14}]^{8+}",
   "absorption_max": 570.0,
   "emission_max": 640.0,
   "emission_max_2": null,
@@ -21,7 +21,7 @@
   "reference": "",
   "reference_header": "",
   "doi": "",
-  "notes": "Under construction. Needs to be normalized.",
+  "notes": "",
   "ab_spectrum": [
     [
       950.0,
@@ -3715,5 +3715,13 @@
     ]
   ],
   "created_at": "2026-06-26T19:19:46.488323",
-  "updated_at": "2026-07-08T10:49:00.302485"
+  "updated_at": "2026-07-08T13:58:06.810239",
+  "purification_method": "HPLC",
+  "references": [
+    {
+      "header": "CsV5",
+      "citation": "D. Schultz et al. (2013), Adv. Mat",
+      "doi": "https://doi.org/10.1002/adma.201204624"
+    }
+  ]
 }

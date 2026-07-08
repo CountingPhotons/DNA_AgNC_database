@@ -9,8 +9,8 @@
   "structure_solved": true,
   "pdb_link": "https://www.rcsb.org/structure/7BSE",
   "parent_slug": "gg322",
-  "mass_formula": "",
-  "molecular_weight": "3006",
+  "mass_formula": "C_{192}H_{242}N_{84}O_{108}P_{18}[Ag_{16}Cl_{2}]^{8+}",
+  "molecular_weight": "DNA_{2}-[Ag_{16}Cl_{2}]^{8+}",
   "absorption_max": 528.0,
   "emission_max": 739.0,
   "emission_max_2": null,
@@ -21,7 +21,7 @@
   "reference": "C. Cerretani et al. (2020), CrystEngComm",
   "reference_header": "GG322 mutants",
   "doi": "https://doi.org/10.1039/d0ce01225d",
-  "notes": "Needs to be normalized!",
+  "notes": "",
   "ab_spectrum": [
     [
       750.0,
@@ -3555,5 +3555,13 @@
     ]
   ],
   "created_at": "2026-06-26T19:35:46.731036",
-  "updated_at": "2026-07-08T11:50:58.725736"
+  "updated_at": "2026-07-08T14:07:35.834179",
+  "purification_method": "HPLC",
+  "references": [
+    {
+      "header": "GG322 mutants",
+      "citation": "C. Cerretani et al. (2020), CrystEngComm",
+      "doi": "https://doi.org/10.1039/d0ce01225d"
+    }
+  ]
 }

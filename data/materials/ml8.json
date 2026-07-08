@@ -5,7 +5,7 @@
   "description": "Exact structure unknown, made from same DNA template as MLQ8. Dual emissive cluster with a micro second lived decay. The cluster size is 18 or 19. Structural verification is needed.",
   "dna_sequence": "TGGACGGCGG",
   "cluster_size": 18,
-  "mass_formula": "C_{196}H_{244}N_{86}O_{116}P_18[Ag_{18}]^{12+}",
+  "mass_formula": "C_{196}H_{244}N_{86}O_{116}P_{18}[Ag_{18}]^{12+}",
   "mz_value": "1628.493",
   "absorption_max": 543.0,
   "emission_max": 623.0,
@@ -11461,11 +11461,19 @@
   ],
   "images": [],
   "created_at": "2026-06-25T12:44:53.650679",
-  "updated_at": "2026-07-08T10:01:52.983330",
+  "updated_at": "2026-07-08T14:11:27.345237",
   "structure_solved": false,
   "valence_number": 6,
   "pdb_link": "",
   "parent_slug": "",
-  "molecular_weight": "",
-  "reference_header": ""
+  "molecular_weight": "DNA_{2}-[Ag_{18}]^{12+}",
+  "reference_header": "",
+  "purification_method": "",
+  "references": [
+    {
+      "header": "",
+      "citation": "V. R\u00fcck et al. (2023), Ang Chem",
+      "doi": "https://doi.org/10.1002/anie.202309760"
+    }
+  ]
 }
