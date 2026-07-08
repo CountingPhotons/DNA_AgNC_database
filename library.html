@@ -54,8 +54,8 @@
             <th class="sortable" data-sort="structure_solved" style="text-align:center;">Structure <span class="sort-arrow">⇅</span></th>
             <th class="sortable" data-sort="absorption_max">Abs max [nm] <span class="sort-arrow">⇅</span></th>
             <th class="sortable" data-sort="emission_max">Em max [nm] <span class="sort-arrow">⇅</span></th>
-            <th>Short-lived (ns)</th>
-            <th>Long-lived (us)</th>
+            <th class="sortable" data-sort="lifetime_ns">Short-lived (ns) <span class="sort-arrow">⇅</span></th>
+            <th class="sortable" data-sort="lifetime_us">Long-lived (us) <span class="sort-arrow">⇅</span></th>
             <th class="sortable" data-sort="quantum_yield">Quantum Yield <span class="sort-arrow">⇅</span></th>
             <th>Solvent</th>
           </tr>
@@ -99,6 +99,16 @@
         if (sortCol === 'structure_solved') {
           va = va ? 1 : 0; vb = vb ? 1 : 0;
           return reverse ? vb - va : va - vb;
+        }
+        // Text-based lifetime fields — parse numerically where possible, non-numeric sorts last
+        if (sortCol === 'lifetime_ns' || sortCol === 'lifetime_us') {
+          const na = parseFloat(va);
+          const nb = parseFloat(vb);
+          const aNum = isNaN(na), bNum = isNaN(nb);
+          if (aNum && bNum) return 0;
+          if (aNum) return 1;   // non-numeric always at end
+          if (bNum) return -1;
+          return reverse ? nb - na : na - nb;
         }
         // numeric columns — nulls sort to the end regardless of direction
         const na = (va === null || va === undefined);
@@ -177,8 +187,13 @@
     });
 
     async function init() {
-      allMaterials = await fetchJSON('data/materials.json');
-      applyFilterSort();
+      try {
+        allMaterials = await fetchJSON('data/materials.json');
+        applyFilterSort();
+      } catch (err) {
+        document.getElementById('tableBody').innerHTML =
+          `<tr class="empty-row"><td colspan="11">Could not load data/materials.json (${err.message}). Try a hard refresh (Ctrl+Shift+R).</td></tr>`;
+      }
     }
     init();
   </script>

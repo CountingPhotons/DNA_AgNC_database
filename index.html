@@ -45,11 +45,12 @@
               <button class="toggle-btn" id="btn-valence" onclick="setXAxis('valence')">Valence Number (N0)</button>
             </div>
           </div>
+          <button id="resetZoomBtn" onclick="resetZoom()" class="btn btn-ghost btn-sm" style="display:none;">↩ Reset Zoom</button>
         </div>
         <div class="chart-container">
           <canvas id="scatterChart"></canvas>
         </div>
-        <div class="chart-hint">↑ click any point to open its characterization page</div>
+        <div class="chart-hint">↑ click any point to open its page · drag to zoom into a region</div>
       </div>
     </div>
 
@@ -67,6 +68,79 @@
   <script>
     let chart, plotData = [];
     const POINT_RADIUS = 10;
+
+    // ── Drag-to-zoom plugin ──────────────────────────────────────────────────
+    let _dzStart = null, _dzRect = null, _dzCurrentMode = 'absorption';
+    const dragZoomPlugin = {
+      id: 'dragZoom',
+      afterInit(chart) {
+        const canvas = chart.canvas;
+        canvas.style.cursor = 'crosshair';
+
+        canvas.addEventListener('mousedown', e => {
+          const rect = canvas.getBoundingClientRect();
+          const x = e.clientX - rect.left, y = e.clientY - rect.top;
+          const ca = chart.chartArea;
+          if (x >= ca.left && x <= ca.right && y >= ca.top && y <= ca.bottom) {
+            _dzStart = {x, y};
+          }
+        });
+
+        canvas.addEventListener('mousemove', e => {
+          if (!_dzStart) return;
+          const rect = canvas.getBoundingClientRect();
+          const cx = e.clientX - rect.left, cy = e.clientY - rect.top;
+          const ca = chart.chartArea;
+          _dzRect = {
+            x: Math.max(ca.left,  Math.min(_dzStart.x, cx)),
+            y: Math.max(ca.top,   Math.min(_dzStart.y, cy)),
+            w: Math.min(ca.right, Math.max(_dzStart.x, cx)) - Math.max(ca.left, Math.min(_dzStart.x, cx)),
+            h: Math.min(ca.bottom,Math.max(_dzStart.y, cy)) - Math.max(ca.top,  Math.min(_dzStart.y, cy)),
+          };
+          chart.render();
+        });
+
+        canvas.addEventListener('mouseup', () => {
+          if (!_dzStart || !_dzRect || _dzRect.w < 8 || _dzRect.h < 8) {
+            _dzStart = null; _dzRect = null; return;
+          }
+          const r = _dzRect;
+          chart.options.scales.x.min = chart.scales.x.getValueForPixel(r.x);
+          chart.options.scales.x.max = chart.scales.x.getValueForPixel(r.x + r.w);
+          chart.options.scales.y.max = chart.scales.y.getValueForPixel(r.y);
+          chart.options.scales.y.min = chart.scales.y.getValueForPixel(r.y + r.h);
+          _dzStart = null; _dzRect = null;
+          chart.update('none');
+          document.getElementById('resetZoomBtn').style.display = 'inline-flex';
+        });
+
+        canvas.addEventListener('mouseleave', () => {
+          _dzStart = null; _dzRect = null; chart.render();
+        });
+      },
+
+      afterDraw(chart) {
+        if (!_dzRect) return;
+        const ctx = chart.ctx;
+        ctx.save();
+        ctx.fillStyle   = 'rgba(0,229,255,0.07)';
+        ctx.strokeStyle = 'rgba(0,229,255,0.5)';
+        ctx.lineWidth   = 1; ctx.setLineDash([4, 3]);
+        ctx.fillRect  (_dzRect.x, _dzRect.y, _dzRect.w, _dzRect.h);
+        ctx.strokeRect(_dzRect.x, _dzRect.y, _dzRect.w, _dzRect.h);
+        ctx.setLineDash([]); ctx.restore();
+      }
+    };
+
+    function resetZoom() {
+      const b = getBounds(_dzCurrentMode);
+      chart.options.scales.x.min = b.xMin;
+      chart.options.scales.x.max = b.xMax;
+      chart.options.scales.y.min = b.yMin;
+      chart.options.scales.y.max = b.yMax;
+      chart.update();
+      document.getElementById('resetZoomBtn').style.display = 'none';
+    }
 
     // Draws a manual gradient-filled circle on top of any dual-emitter point
     // (Chart.js can't do a per-point gradient fill natively) — those points
@@ -150,6 +224,8 @@
     };
 
     function setXAxis(mode) {
+      _dzCurrentMode = mode;
+      document.getElementById('resetZoomBtn').style.display = 'none';
       document.getElementById('btn-abs').classList.toggle('active', mode === 'absorption');
       document.getElementById('btn-size').classList.toggle('active', mode === 'cluster_size');
       document.getElementById('btn-valence').classList.toggle('active', mode === 'valence');
@@ -187,7 +263,7 @@
       chart = new Chart(document.getElementById('scatterChart').getContext('2d'), {
         type: 'scatter',
         data: { datasets: buildDatasets('absorption') },
-        plugins: [gradientDotPlugin],
+        plugins: [dragZoomPlugin, gradientDotPlugin],
         options: {
           responsive: true, maintainAspectRatio: false,
           plugins: {
@@ -232,7 +308,10 @@
       });
     }
 
-    init();
+    init().catch(err => {
+      document.querySelector('.hero-sub').innerHTML =
+        `Could not load data/materials.json (${err.message}). Try a hard refresh (Ctrl+Shift+R).`;
+    });
   </script>
 </body>
 </html>
