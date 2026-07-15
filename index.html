@@ -19,6 +19,7 @@
       <a href="library.html">Library</a>
       <a href="spectra.html">Spectra Viewer</a>
       <a href="https://huggingface.co/spaces/CoppLab/NucleoSpec" target="_blank" rel="noopener" class="nav-pill">Mass Spec Analysis</a>
+      <a href="cluster_data_template.txt" download class="nav-pill nav-contribute" title="Download the data contribution template">⬇ Contribute Cluster</a>
     </div>
   </nav>
 
@@ -190,7 +191,8 @@
             label: m.name,
             data: [{ x: xVal, y: m.emission_max, slug: m.slug, name: m.name,
                       abs: m.absorption_max, em: m.emission_max, em2: m.emission_max_2,
-                      size: m.cluster_size, valence: m.valence_number, seq: m.dna_sequence }],
+                      size: m.cluster_size, valence: m.valence_number, seq: m.dna_sequence,
+                      ec: m.extinction_coefficient, ecm: m.ec_method }],
             backgroundColor: emC + 'bb',
             borderColor: emC,
             borderWidth: 2,
@@ -281,6 +283,7 @@
                   if (d.abs != null) lines.push(`Abs: ${d.abs} nm`);
                   if (d.size != null) lines.push(`Ag${d.size} cluster`);
                   if (d.valence != null) lines.push(`N0: ${d.valence}`);
+                  if (d.ec != null) lines.push(`ε: ${d.ec.toLocaleString()}${d.ecm ? ' (' + d.ecm + ')' : ''} M⁻¹cm⁻¹`);
                   if (d.seq) lines.push(`Seq: ${d.seq}`);
                   return lines;
                 }

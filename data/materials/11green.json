@@ -21,7 +21,7 @@
   "reference": "V. R\u00fcck et al. (2023), Adv. Opt. Mat.",
   "reference_header": "",
   "doi": "https://doi.org/10.1002/adom.202301928",
-  "notes": "",
+  "notes": "Molar absorption coefficient determined via DNA peak at 260 nm was found to be 50000 M-1cm-1",
   "ab_spectrum": [
     [
       700.0,
@@ -3115,7 +3115,7 @@
     ]
   ],
   "created_at": "2026-07-08T09:47:57.516798",
-  "updated_at": "2026-07-08T13:57:15.621115",
+  "updated_at": "2026-07-14T10:17:05.519910",
   "purification_method": "HPLC",
   "references": [
     {
@@ -3123,5 +3123,7 @@
       "citation": "V. R\u00fcck et al. (2023), Adv. Opt. Mat.",
       "doi": "https://doi.org/10.1002/adom.202301928"
     }
-  ]
+  ],
+  "extinction_coefficient": 54000.0,
+  "ec_method": "ICPOES"
 }

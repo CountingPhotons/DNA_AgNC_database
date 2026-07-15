@@ -2,15 +2,15 @@
   "id": "f48895aa",
   "slug": "csv5-3",
   "name": "CsV5-20-21-22",
-  "description": "No compositional information available.",
+  "description": "No compositional information available. Amount of silvers and oxidation state are thought to be the same as parent cluster.",
   "dna_sequence": "TTCCCACCCACCCCGGCCC",
-  "cluster_size": null,
-  "valence_number": null,
+  "cluster_size": 14,
+  "valence_number": 6,
   "structure_solved": false,
   "pdb_link": "",
   "parent_slug": "csv5",
-  "mass_formula": "",
-  "molecular_weight": "",
+  "mass_formula": "C_{177}H_{231}N_{63}O_{112}P_{18}[Ag_{14}]^{8+}",
+  "molecular_weight": "DNA_{1}-[Ag_{14}]^{8+}",
   "absorption_max": 570.0,
   "emission_max": 640.0,
   "emission_max_2": null,
@@ -21,7 +21,7 @@
   "reference": "C. Cerretani et al. (2017), Chem. Commun.",
   "reference_header": "CsV5 mutant",
   "doi": "https://doi.org/10.1039/c7cc06785b",
-  "notes": "",
+  "notes": "No estimation of molar absorption coefficient has been calculated, as the 260 nm DNA peak is missing.",
   "ab_spectrum": [
     [
       750.0,
@@ -1783,7 +1783,7 @@
     ]
   ],
   "created_at": "2026-06-26T19:23:22.537694",
-  "updated_at": "2026-07-08T13:10:28.238101",
+  "updated_at": "2026-07-14T10:24:21.981270",
   "purification_method": "HPLC",
   "references": [
     {
@@ -1791,5 +1791,7 @@
       "citation": "C. Cerretani et al. (2017), Chem. Commun.",
       "doi": "https://doi.org/10.1039/c7cc06785b"
     }
-  ]
+  ],
+  "extinction_coefficient": null,
+  "ec_method": ""
 }

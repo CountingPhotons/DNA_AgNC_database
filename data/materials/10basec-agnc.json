@@ -3555,7 +3555,7 @@
     ]
   ],
   "created_at": "2026-06-26T19:34:17.496710",
-  "updated_at": "2026-07-08T15:11:10.106860",
+  "updated_at": "2026-07-15T09:51:24.135634",
   "purification_method": "HPLC",
   "references": [
     {
@@ -3563,5 +3563,7 @@
       "citation": "C. Cerretani et al. (2020), CrystEngComm",
       "doi": "https://doi.org/10.1039/d0ce01225d"
     }
-  ]
+  ],
+  "extinction_coefficient": 32000.0,
+  "ec_method": "DNA"
 }

@@ -11,7 +11,7 @@
   "emission_max": 623.0,
   "emission_max_2": 850.0,
   "quantum_yield": 0.02,
-  "extinction_coefficient": null,
+  "extinction_coefficient": 69000.0,
   "brightness": null,
   "lifetime_ns": "0.091",
   "solvent": "10mM NH_{4}OAc",
@@ -11461,19 +11461,20 @@
   ],
   "images": [],
   "created_at": "2026-06-25T12:44:53.650679",
-  "updated_at": "2026-07-08T14:11:27.345237",
+  "updated_at": "2026-07-15T10:29:51.135238",
   "structure_solved": false,
   "valence_number": 6,
   "pdb_link": "",
   "parent_slug": "",
   "molecular_weight": "DNA_{2}-[Ag_{18}]^{12+}",
   "reference_header": "",
-  "purification_method": "",
+  "purification_method": "HPLC",
   "references": [
     {
       "header": "",
       "citation": "V. R\u00fcck et al. (2023), Ang Chem",
       "doi": "https://doi.org/10.1002/anie.202309760"
     }
-  ]
+  ],
+  "ec_method": "DNA"
 }

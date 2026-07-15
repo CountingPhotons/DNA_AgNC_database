@@ -2,14 +2,14 @@
   "id": "084a7c75",
   "slug": "10basespacer-agnc",
   "name": "GG322-X5",
-  "description": "The X stand for and abasic site.",
+  "description": "The X stands for an abasic site.",
   "dna_sequence": "CACCXAGCGA",
   "cluster_size": 16,
   "valence_number": 6,
   "structure_solved": true,
   "pdb_link": "https://www.rcsb.org/structure/7BSH",
   "parent_slug": "gg322",
-  "mass_formula": "",
+  "mass_formula": "C_{182}H_{234}N_{74}O_{110}P_{18}[Ag_{16}Cl_{2}]^{8+}",
   "molecular_weight": "DNA_{2}-[Ag_{16}Cl_{2}]^{8+}",
   "absorption_max": 524.0,
   "emission_max": 761.0,
@@ -3555,7 +3555,7 @@
     ]
   ],
   "created_at": "2026-06-26T19:31:58.613163",
-  "updated_at": "2026-07-08T13:14:51.588747",
+  "updated_at": "2026-07-14T10:30:51.808577",
   "purification_method": "HPLC",
   "references": [
     {
@@ -3563,5 +3563,7 @@
       "citation": "C. Cerretani et al. (2020), CrystEngComm",
       "doi": "https://doi.org/10.1039/d0ce01225d"
     }
-  ]
+  ],
+  "extinction_coefficient": null,
+  "ec_method": ""
 }

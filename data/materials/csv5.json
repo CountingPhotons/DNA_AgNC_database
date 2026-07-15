@@ -3715,7 +3715,7 @@
     ]
   ],
   "created_at": "2026-06-26T19:19:46.488323",
-  "updated_at": "2026-07-08T15:21:47.444853",
+  "updated_at": "2026-07-13T11:56:59.040420",
   "purification_method": "HPLC",
   "references": [
     {
@@ -3723,5 +3723,7 @@
       "citation": "D. Schultz et al. (2013), Adv. Mat",
       "doi": "https://doi.org/10.1002/adma.201204624"
     }
-  ]
+  ],
+  "extinction_coefficient": 86000.0,
+  "ec_method": "ICPOES"
 }
