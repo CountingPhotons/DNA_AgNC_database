@@ -19,7 +19,6 @@
       <a href="library.html">Library</a>
       <a href="spectra.html" class="active">Spectra Viewer</a>
       <a href="https://huggingface.co/spaces/CoppLab/NucleoSpec" target="_blank" rel="noopener" class="nav-pill">Mass Spec Analysis</a>
-      <a href="cluster_data_template.txt" download class="nav-pill nav-contribute" title="Download the data contribution template">⬇ Contribute Cluster</a>
     </div>
   </nav>
 
@@ -33,16 +32,8 @@
 
     <div id="viewerLayout" class="viewer-layout" style="display:none;">
       <div>
-        <div class="material-list" id="materialList" style="display:flex;flex-direction:column;">
-          <div class="material-list-header" style="flex-shrink:0;">Select Materials</div>
-          <div style="padding:0.45rem 0.65rem;border-bottom:1px solid var(--border);flex-shrink:0;">
-            <input type="text" id="spectraSearch" placeholder="Search…"
-              oninput="filterSpectraList(this.value)"
-              style="width:100%;background:var(--surface2);border:1px solid var(--border2);border-radius:var(--radius);color:var(--text);font-family:var(--mono);font-size:0.78rem;padding:0.35rem 0.6rem;outline:none;">
-          </div>
-          <div id="spectraListItems" style="overflow-y:auto;max-height:400px;">
-            <!-- populated by JS -->
-          </div>
+        <div class="material-list" id="materialList">
+          <div class="material-list-header">Select Materials</div>
         </div>
         <div class="btn-row">
           <button onclick="selectAll()" class="btn btn-ghost btn-sm">Select All</button>
@@ -200,7 +191,7 @@
         };
       });
 
-      const listEl = document.getElementById('spectraListItems');
+      const listEl = document.getElementById('materialList');
       materialsData.forEach(m => {
         const wl = [
           m.absorption_max ? `Abs ${Math.round(m.absorption_max)}` : '',
@@ -210,7 +201,6 @@
         const div = document.createElement('div');
         div.className = 'material-item';
         div.id = 'item-' + m.slug;
-        div.dataset.name = m.name.toLowerCase();
         div.onclick = () => toggleMaterial(m.slug);
         div.innerHTML = `
           <div class="item-check" id="check-${m.slug}"></div>
@@ -286,18 +276,7 @@
       });
     }
 
-    function filterSpectraList(q) {
-      const term = q.toLowerCase().trim();
-      document.querySelectorAll('#spectraListItems .material-item').forEach(el => {
-        el.style.display = (!term || el.dataset.name.includes(term)) ? '' : 'none';
-      });
-    }
-
-    init().catch(err => {
-      const el = document.getElementById('emptyMsg');
-      el.textContent = `Could not load data/materials.json (${err.message}). Try a hard refresh (Ctrl+Shift+R).`;
-      el.style.display = 'block';
-    });
+    init();
   </script>
 </body>
 </html>

@@ -92,22 +92,6 @@ function irfShort(value) {
   return v;
 }
 
-/**
- * Return a list of {header, citation, doi} objects from a material record.
- * Handles both the new array format (m.references) and the old single-reference
- * format (m.reference / m.reference_header / m.doi) for backward compatibility.
- */
-function getReferences(m) {
-  if (m.references && Array.isArray(m.references)) {
-    return m.references.filter(r => r.citation || r.doi);
-  }
-  // Backward compat with old single-reference fields
-  if (m.reference || m.doi) {
-    return [{header: m.reference_header || '', citation: m.reference || '', doi: m.doi || ''}];
-  }
-  return [];
-}
-
 /** Fetch JSON with a friendly error if the file is missing (helps local testing). */
 async function fetchJSON(path) {
   const res = await fetch(path);

@@ -7,73 +7,9 @@
   <link rel="stylesheet" href="static/css/style.css">
   <script src="static/js/common.js"></script>
   <style>
-    main { max-width: 1700px; }
-
-    /* ── Inline header + search ── */
-    .library-topbar { display: flex; align-items: center; gap: 1.25rem; margin-bottom: 1rem; flex-wrap: wrap; }
-    .library-topbar h1 { font-size: 1.5rem; font-weight: 500; white-space: nowrap; }
-    .library-topbar .search-inline { flex: 1; min-width: 200px; display: flex; gap: 0.5rem; align-items: center; }
-    .library-topbar .search-inline input { flex: 1; }
-
-    /* ── Count row with optional-column toggles ── */
-    .count-row { display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 0.6rem; font-size: 0.75rem; color: var(--text-muted); }
-    .count-row .count-num { color: var(--accent); }
-    .col-toggle-group { display: flex; gap: 0.35rem; align-items: center; margin-left: 0.5rem; }
-    .col-toggle-label { font-size: 0.67rem; color: var(--text-dim); letter-spacing: 0.06em; text-transform: uppercase; }
-    .col-toggle-btn {
-      display: inline-flex; align-items: center; gap: 4px;
-      padding: 0.2rem 0.6rem; border-radius: var(--radius);
-      font-family: var(--mono); font-size: 0.68rem;
-      border: 1px solid var(--border2); background: transparent;
-      color: var(--text-muted); cursor: pointer; transition: all 0.15s; user-select: none;
-    }
-    .col-toggle-btn:hover { color: var(--text); background: var(--surface2); }
-    .col-toggle-btn.active { background: var(--surface2); border-color: var(--accent); color: var(--accent); }
-    .col-toggle-btn .toggle-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; opacity: 0.6; }
-
-    /* Optional columns — hidden by default */
-    th.opt-chemf, td.opt-chemf,
-    th.opt-compf, td.opt-compf,
-    th.opt-solvent, td.opt-solvent,
-    th.opt-purif, td.opt-purif { display: none; }
-    table.show-chemf   th.opt-chemf,   table.show-chemf   td.opt-chemf   { display: table-cell; }
-    table.show-compf   th.opt-compf,   table.show-compf   td.opt-compf   { display: table-cell; }
-    table.show-solvent th.opt-solvent,  table.show-solvent td.opt-solvent { display: table-cell; }
-    table.show-purif   th.opt-purif,   table.show-purif   td.opt-purif   { display: table-cell; }
-
-    /* ── Scrollable-within table ── */
-    .table-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
-    .table-scroll { overflow-x: auto; overflow-y: auto; max-height: calc(100vh - 220px); }
-    table { width: 100%; border-collapse: collapse; }
-
-    thead th {
-      position: sticky; top: 0; z-index: 3;
-      text-align: left; padding: 0.7rem 0.75rem;
-      font-size: 0.65rem; font-weight: 500; color: var(--text-muted);
-      letter-spacing: 0.08em; text-transform: uppercase;
-      background: var(--surface2); white-space: nowrap; user-select: none;
-      border-bottom: 1px solid var(--border);
-    }
-    thead th.sortable { cursor: pointer; transition: color 0.15s; }
-    thead th.sortable:hover { color: var(--text); }
-    thead th.sort-active { color: var(--accent); }
-    .sort-arrow { display: inline-block; margin-left: 3px; font-size: 0.6rem; opacity: 0.5; }
-    thead th.sort-active .sort-arrow { opacity: 1; color: var(--accent); }
-    tbody tr { border-bottom: 1px solid var(--border); transition: background 0.1s; cursor: pointer; }
-    tbody tr:last-child { border-bottom: none; }
-    tbody tr:hover { background: var(--surface2); }
-    td { padding: 0.65rem 0.75rem; font-size: 0.83rem; vertical-align: middle; color: var(--text); white-space: nowrap; }
-    .td-name { font-weight: 500; min-width: 100px; }
-    .td-name a { color: var(--text); text-decoration: none; }
-    .td-name a:hover { color: var(--accent); }
-    .td-seq { max-width: 90px; width: 90px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 0.72rem; color: var(--text); }
-    .color-swatch { display: inline-flex; align-items: center; gap: 5px; }
-    .swatch-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-    .empty-row td { text-align: center; padding: 3rem; color: var(--text-muted); }
-    .ec-badge    { border-radius: 3px; padding: 1px 4px; font-size: 0.77em; display: inline-block; }
-    .ec-fcs      { background: rgba(100,200,255,0.15); border: 1px solid rgba(100,200,255,0.4); color: #7dd3fc; }
-    .ec-dna      { background: rgba(100,235,140,0.15); border: 1px solid rgba(100,235,140,0.4); color: #86efac; }
-    .ec-icpoes   { background: rgba(255,150,190,0.15); border: 1px solid rgba(255,150,190,0.4); color: #f9a8d4; }
+    /* This page has a wide table (11 columns) — give it more room than the
+       site's normal 1200px content width so it needs less internal scrolling. */
+    main { max-width: 1600px; }
   </style>
 </head>
 <body>
@@ -86,78 +22,72 @@
       <a href="index.html">Home</a>
       <a href="library.html" class="active">Library</a>
       <a href="spectra.html">Spectra Viewer</a>
-      <a href="https://huggingface.co/spaces/CoppLab/NucleoSpec" target="_blank" rel="noopener" class="nav-pill">Mass Spec Analysis</a>
-      <a href="cluster_data_template.txt" download class="nav-pill nav-contribute" title="Download the data contribution template">⬇ Contribute Cluster</a>
+      <a href="https://huggingface.co/spaces/CoppLab/NucleoSpec" target="_blank" class="nav-pill">Mass Spec Analysis</a>
     </div>
   </nav>
 
   <main>
-    <div class="library-topbar">
+    <div class="library-header">
       <h1>Cluster Library</h1>
-      <div class="search-inline">
-        <input type="text" id="searchInput" placeholder="Search name, description, DNA sequence…">
+      <p class="muted" style="font-size:0.82rem;">All DNA-AgNC materials in the database</p>
+    </div>
+
+    <div class="filter-bar">
+      <div class="fg">
+        <label>Search (name, description, DNA sequence)</label>
+        <input type="text" id="searchInput" placeholder="Search…">
       </div>
     </div>
 
-    <div class="count-row">
+    <div class="count-label">
       Showing <span id="countNum" class="count-num">0</span> cluster<span id="countPlural">s</span>
-      <div class="col-toggle-group">
-        <span class="col-toggle-label">Show:</span>
-        <button class="col-toggle-btn" data-col="chemf"   onclick="toggleCol(this)"><span class="toggle-dot"></span>Chem. Formula</button>
-        <button class="col-toggle-btn" data-col="compf"   onclick="toggleCol(this)"><span class="toggle-dot"></span>Comp. Formula</button>
-        <button class="col-toggle-btn" data-col="solvent" onclick="toggleCol(this)"><span class="toggle-dot"></span>Solvent</button>
-        <button class="col-toggle-btn" data-col="purif"   onclick="toggleCol(this)"><span class="toggle-dot"></span>Purif.</button>
-      </div>
     </div>
 
     <div class="table-wrap">
-      <div class="table-scroll">
       <table id="clusterTable">
         <thead>
           <tr>
             <th class="sortable" data-sort="name">Name <span class="sort-arrow">⇅</span></th>
             <th class="sortable" data-sort="dna_sequence">DNA Sequence <span class="sort-arrow">⇅</span></th>
-            <th class="sortable" data-sort="structure_solved" style="text-align:center;">Struct. <span class="sort-arrow">⇅</span></th>
-            <th class="sortable" data-sort="absorption_max">Abs [nm] <span class="sort-arrow">⇅</span></th>
-            <th class="sortable" data-sort="emission_max">Em [nm] <span class="sort-arrow">⇅</span></th>
-            <th class="sortable" data-sort="cluster_size">N <span class="sort-arrow">⇅</span></th>
-            <th class="sortable" data-sort="valence_number">N₀ <span class="sort-arrow">⇅</span></th>
-            <th class="sortable" data-sort="quantum_yield">QY <span class="sort-arrow">⇅</span></th>
-            <th class="sortable" data-sort="extinction_coefficient">ε [M⁻¹cm⁻¹] <span class="sort-arrow">⇅</span></th>
-            <th class="sortable" data-sort="lifetime_ns">τ (ns) <span class="sort-arrow">⇅</span></th>
-            <th class="sortable" data-sort="lifetime_us">τ (us) <span class="sort-arrow">⇅</span></th>
-            <th class="opt-chemf">Chem. Formula</th>
-            <th class="opt-compf">Comp. Formula</th>
-            <th class="opt-solvent">Solvent</th>
-            <th class="opt-purif">Purif.</th>
+            <th class="sortable" data-sort="cluster_size">Cluster Size (N) <span class="sort-arrow">⇅</span></th>
+            <th class="sortable" data-sort="valence_number">Valence (N₀) <span class="sort-arrow">⇅</span></th>
+            <th class="sortable" data-sort="structure_solved" style="text-align:center;">Structure <span class="sort-arrow">⇅</span></th>
+            <th class="sortable" data-sort="absorption_max">Abs max [nm] <span class="sort-arrow">⇅</span></th>
+            <th class="sortable" data-sort="emission_max">Em max [nm] <span class="sort-arrow">⇅</span></th>
+            <th>Short-lived (ns)</th>
+            <th>Long-lived (us)</th>
+            <th class="sortable" data-sort="quantum_yield">Quantum Yield <span class="sort-arrow">⇅</span></th>
+            <th>Solvent</th>
           </tr>
         </thead>
         <tbody id="tableBody">
-          <tr class="empty-row"><td colspan="15">Loading…</td></tr>
+          <tr class="empty-row"><td colspan="11">Loading…</td></tr>
         </tbody>
       </table>
-      </div>
     </div>
   </main>
 
   <footer>
-    DNA-AgNC DB &nbsp;·&nbsp; read-only public mirror &nbsp;·&nbsp; data published as static JSON
+    DNA-AgNC DB — DNA-Stabilized Silver Nanocluster Database &nbsp;·&nbsp;
+    read-only public mirror &nbsp;·&nbsp; data published as static JSON
   </footer>
 
   <script>
     let allMaterials = [];
-    let sortCol = 'name', sortDir = 'asc', query = '';
-    const TABLE = document.getElementById('clusterTable');
-    const COL_ORDER = ['chemf', 'compf', 'solvent', 'purif'];
+    let sortCol = 'name';
+    let sortDir = 'asc';
+    let query = '';
 
     function applyFilterSort() {
       let rows = allMaterials;
       const q = query.toLowerCase().trim();
-      if (q) rows = rows.filter(m =>
-        (m.name || '').toLowerCase().includes(q) ||
-        (m.description || '').toLowerCase().includes(q) ||
-        (m.dna_sequence || '').toLowerCase().includes(q)
-      );
+      if (q) {
+        rows = rows.filter(m =>
+          (m.name || '').toLowerCase().includes(q) ||
+          (m.description || '').toLowerCase().includes(q) ||
+          (m.dna_sequence || '').toLowerCase().includes(q)
+        );
+      }
 
       const reverse = sortDir === 'desc';
       rows = [...rows].sort((a, b) => {
@@ -170,15 +100,12 @@
           va = va ? 1 : 0; vb = vb ? 1 : 0;
           return reverse ? vb - va : va - vb;
         }
-        if (sortCol === 'lifetime_ns' || sortCol === 'lifetime_us') {
-          const na = parseFloat(va), nb = parseFloat(vb);
-          if (isNaN(na) && isNaN(nb)) return 0;
-          if (isNaN(na)) return 1; if (isNaN(nb)) return -1;
-          return reverse ? nb - na : na - nb;
-        }
+        // numeric columns — nulls sort to the end regardless of direction
         const na = (va === null || va === undefined);
         const nb = (vb === null || vb === undefined);
-        if (na && nb) return 0; if (na) return 1; if (nb) return -1;
+        if (na && nb) return 0;
+        if (na) return 1;
+        if (nb) return -1;
         return reverse ? vb - va : va - vb;
       });
 
@@ -193,55 +120,44 @@
       });
     }
 
-    function ecBadge(m) {
-      if (!m.extinction_coefficient) return '—';
-      const val = Math.round(m.extinction_coefficient).toLocaleString('en-US').replace(/,/g, '.');
-      const cls = m.ec_method ? 'ec-' + m.ec_method.toLowerCase() : '';
-      return `<span class="ec-badge ${cls}">${val}</span>`;
-    }
-
     function renderRows(rows) {
       const tbody = document.getElementById('tableBody');
-      if (!rows.length) { tbody.innerHTML = `<tr class="empty-row"><td colspan="15">No materials found.</td></tr>`; return; }
+      if (!rows.length) {
+        tbody.innerHTML = `<tr class="empty-row"><td colspan="11">No materials found.</td></tr>`;
+        return;
+      }
       tbody.innerHTML = rows.map(m => {
-        const seq = m.dna_sequence || '—';
+        const seq = m.dna_sequence ? m.dna_sequence : '—';
         const cluster = m.cluster_size ? `Ag<sub>${m.cluster_size}</sub>` : '—';
-        const valence = m.valence_number != null ? m.valence_number : '—';
+        const valence = (m.valence_number != null) ? m.valence_number : '—';
         const solved = m.structure_solved
-          ? `<span style="color:var(--accent3);" title="Structure solved">✓</span>`
-          : `<span style="color:var(--danger);" title="Not solved">✗</span>`;
+          ? `<span style="color:var(--accent3); font-size:1.05rem;" title="Structure solved">✓</span>`
+          : `<span style="color:var(--danger); font-size:1.05rem;" title="Structure not yet solved">✗</span>`;
         const abs = m.absorption_max
-          ? `<span class="color-swatch"><span class="swatch-dot" style="background:${nmColor(m.absorption_max)};"></span>${Math.round(m.absorption_max)}</span>` : '—';
-        let em = m.emission_max
-          ? `<span class="color-swatch"><span class="swatch-dot" style="background:${nmColor(m.emission_max)};"></span>${Math.round(m.emission_max)}</span>` : '—';
-        if (m.emission_max && m.emission_max_2)
-          em += ` <span style="opacity:0.4;">/</span> <span class="color-swatch"><span class="swatch-dot" style="background:${nmColor(m.emission_max_2)};"></span>${Math.round(m.emission_max_2)}</span>`;
+          ? `<span class="color-swatch"><span class="swatch-dot" style="background:${nmColor(m.absorption_max)};"></span>${Math.round(m.absorption_max)}</span>`
+          : '—';
+        const em = m.emission_max
+          ? `<span class="color-swatch"><span class="swatch-dot" style="background:${nmColor(m.emission_max)};"></span>${Math.round(m.emission_max)}</span>` +
+            (m.emission_max_2 ? ` <span style="opacity:0.4;">/</span> <span class="color-swatch"><span class="swatch-dot" style="background:${nmColor(m.emission_max_2)};"></span>${Math.round(m.emission_max_2)}</span>` : '')
+          : '—';
+        const lifetimeNs = irfShort(m.lifetime_ns);
+        const lifetimeUs = irfShort(m.lifetime_us);
         const qy = m.quantum_yield != null ? m.quantum_yield.toFixed(3) : '—';
-        const ec = ecBadge(m);
-        const nsLife = irfShort(m.lifetime_ns);
-        const usLife = irfShort(m.lifetime_us);
-        const massF = m.mass_formula ? chemNotation(m.mass_formula) : '—';
-        const molW  = m.molecular_weight ? chemNotation(m.molecular_weight) : '—';
-        const solv  = m.solvent ? chemNotation(m.solvent) : '—';
-        const purif = m.purification_method || '—';
-        const slug  = encodeURIComponent(m.slug);
+        const solvent = m.solvent || '—';
+        const slug = encodeURIComponent(m.slug);
         return `
           <tr onclick="location.href='material.html?slug=${slug}'">
             <td class="td-name"><a href="material.html?slug=${slug}">${m.name}</a></td>
             <td class="td-seq" title="${seq}">${seq}</td>
+            <td>${cluster}</td>
+            <td>${valence}</td>
             <td style="text-align:center;">${solved}</td>
             <td>${abs}</td>
             <td>${em}</td>
-            <td>${cluster}</td>
-            <td>${valence}</td>
+            <td style="font-size:0.82rem;">${lifetimeNs}</td>
+            <td style="font-size:0.82rem;">${lifetimeUs}</td>
             <td>${qy}</td>
-            <td>${ec}</td>
-            <td style="font-size:0.82rem;">${nsLife}</td>
-            <td style="font-size:0.82rem;">${usLife}</td>
-            <td class="opt-chemf" style="font-size:0.78rem;">${massF}</td>
-            <td class="opt-compf" style="font-size:0.78rem;">${molW}</td>
-            <td class="opt-solvent" style="font-size:0.78rem;">${solv}</td>
-            <td class="opt-purif" style="font-size:0.78rem;">${purif}</td>
+            <td style="color:var(--text);">${solvent}</td>
           </tr>`;
       }).join('');
     }
@@ -260,35 +176,9 @@
       applyFilterSort();
     });
 
-    // Optional column toggles — state saved in localStorage
-    function toggleCol(btn) {
-      const col = btn.dataset.col;
-      TABLE.classList.toggle('show-' + col);
-      btn.classList.toggle('active');
-      const active = COL_ORDER.filter(c => TABLE.classList.contains('show-' + c));
-      try { localStorage.setItem('libCols', JSON.stringify(active)); } catch(e){}
-    }
-
-    (function restoreCols() {
-      let saved = [];
-      try { saved = JSON.parse(localStorage.getItem('libCols') || '[]'); } catch(e){}
-      COL_ORDER.forEach(col => {
-        if (saved.includes(col)) {
-          TABLE.classList.add('show-' + col);
-          const btn = document.querySelector('.col-toggle-btn[data-col="' + col + '"]');
-          if (btn) btn.classList.add('active');
-        }
-      });
-    })();
-
     async function init() {
-      try {
-        allMaterials = await fetchJSON('data/materials.json');
-        applyFilterSort();
-      } catch (err) {
-        document.getElementById('tableBody').innerHTML =
-          `<tr class="empty-row"><td colspan="15">Could not load data (${err.message}). Try Ctrl+Shift+R.</td></tr>`;
-      }
+      allMaterials = await fetchJSON('data/materials.json');
+      applyFilterSort();
     }
     init();
   </script>
