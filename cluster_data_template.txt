@@ -20,8 +20,7 @@ HOW TO USE THIS FILE
    below the relevant line, one pair per line, comma or tab separated.
    If copying from Excel, just select your two columns and paste.
    Intensities should be normalized so the peak = 1.0.
-8. Send the completed file back by email, Slack, or however you normally
-   share documents.
+8. Send the completed file back by email at simon.lind@chem.ku.dk and/or tom@chem.ku.dk
 
 An EXAMPLE (already filled in) is shown first.
 The blank TEMPLATE to copy is at the bottom.
