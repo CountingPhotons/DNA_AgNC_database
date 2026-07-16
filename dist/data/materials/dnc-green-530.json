@@ -1,0 +1,97 @@
+{
+  "id": "a1b2c3d4",
+  "slug": "dnc-green-530",
+  "name": "DNA-NC Green-530",
+  "description": "Green-emitting DNA-stabilized silver nanocluster with a cytosine-rich scaffold.",
+  "dna_sequence": "CCCCAACCCGCCCAACCC",
+  "cluster_size": 6,
+  "absorption_max": 490.0,
+  "emission_max": 530.0,
+  "quantum_yield": 0.42,
+  "extinction_coefficient": 85000.0,
+  "brightness": null,
+  "lifetime_ns": 2.1,
+  "solvent": "10 mM PBS pH 7.4",
+  "reference": "Schultz et al. (2004) PNAS",
+  "doi": "10.1073/pnas.0408575101",
+  "notes": "Stable over weeks at 4\u00b0C. Sensitive to ionic strength.",
+  "ab_spectrum": [
+    [
+      450,
+      0.05
+    ],
+    [
+      460,
+      0.12
+    ],
+    [
+      470,
+      0.28
+    ],
+    [
+      480,
+      0.58
+    ],
+    [
+      490,
+      1.0
+    ],
+    [
+      500,
+      0.88
+    ],
+    [
+      510,
+      0.52
+    ],
+    [
+      520,
+      0.18
+    ],
+    [
+      530,
+      0.04
+    ]
+  ],
+  "em_spectrum": [
+    [
+      490,
+      0.02
+    ],
+    [
+      500,
+      0.08
+    ],
+    [
+      510,
+      0.35
+    ],
+    [
+      520,
+      0.78
+    ],
+    [
+      530,
+      1.0
+    ],
+    [
+      540,
+      0.82
+    ],
+    [
+      550,
+      0.45
+    ],
+    [
+      560,
+      0.15
+    ],
+    [
+      570,
+      0.03
+    ]
+  ],
+  "images": [],
+  "created_at": "2024-01-15T10:00:00",
+  "updated_at": "2024-01-15T10:00:00"
+}
