@@ -121,6 +121,16 @@ nav {
   border: 1px solid var(--border2);
   color: var(--accent) !important;
 }
+.nav-contribute {
+  color: var(--text-muted) !important;
+  border-color: var(--border2) !important;
+  background: transparent !important;
+  font-size: 0.75rem !important;
+}
+.nav-contribute:hover {
+  color: var(--text) !important;
+  background: var(--surface2) !important;
+}
 
 /* ── Layout ── */
 main { max-width: 1200px; margin: 0 auto; padding: 2rem; }
@@ -371,6 +381,12 @@ td { padding: 0.75rem 1rem; font-size: 0.84rem; vertical-align: middle; color: v
 .tree-node-circle.current { cursor: default; }
 .tree-edge { stroke: var(--border2); stroke-width: 1.5px; fill: none; }
 .tree-empty { padding: 1.25rem 1rem; text-align: center; font-size: 0.78rem; color: var(--text-dim); }
+
+/* ── EC method color badges (library table) ── */
+.ec-badge    { border-radius: 3px; padding: 1px 4px; font-size: 0.77em; display: inline-block; }
+.ec-fcs      { background: rgba(100,200,255,0.15); border: 1px solid rgba(100,200,255,0.4); color: #7dd3fc; }
+.ec-dna      { background: rgba(100,235,140,0.15); border: 1px solid rgba(100,235,140,0.4); color: #86efac; }
+.ec-icpoes   { background: rgba(255,150,190,0.15); border: 1px solid rgba(255,150,190,0.4); color: #f9a8d4; }
 
 /* ── Reference header tag ── */
 .ref-header {

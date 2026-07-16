@@ -9,13 +9,13 @@
   "absorption_max": 545.0,
   "emission_max": 881.0,
   "quantum_yield": 0.016,
-  "extinction_coefficient": null,
+  "extinction_coefficient": 77000.0,
   "brightness": null,
   "lifetime_ns": "",
-  "solvent": "Water",
+  "solvent": "10mM NH_{4}OAc",
   "reference": "L. Liccardo et al. (2026), JACS",
   "doi": "https://doi.org/10.1021/jacs.6c04812",
-  "notes": "Protein Data Bank (PDB) with the accession code 23LP.",
+  "notes": "",
   "ab_spectrum": [
     [
       799.0,
@@ -11458,13 +11458,23 @@
   ],
   "images": [],
   "created_at": "2026-06-25T09:46:56.863437",
-  "updated_at": "2026-06-26T18:00:14.328940",
+  "updated_at": "2026-07-15T10:30:50.664361",
   "mz_value": "1649.881",
   "emission_max_2": null,
   "lifetime_us": "22",
   "structure_solved": true,
-  "valence_number": null,
-  "pdb_link": "",
+  "valence_number": 6,
+  "pdb_link": "https://www.rcsb.org/structure/23LP",
   "parent_slug": "ml8",
-  "molecular_weight": ""
+  "molecular_weight": "DNA_{2}-[Ag_{19}]^{13+}",
+  "reference_header": "ML8 mutant",
+  "purification_method": "HPLC",
+  "ec_method": "DNA",
+  "references": [
+    {
+      "header": "ML8 mutant",
+      "citation": "L. Liccardo et al. (2026), JACS",
+      "doi": "https://doi.org/10.1021/jacs.6c04812"
+    }
+  ]
 }

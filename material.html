@@ -20,6 +20,7 @@
       <a href="library.html">Library</a>
       <a href="spectra.html">Spectra Viewer</a>
       <a href="https://huggingface.co/spaces/CoppLab/NucleoSpec" target="_blank" class="nav-pill">Mass Spec Analysis</a>
+      <a href="cluster_data_template.txt" download class="nav-pill nav-contribute" title="Download the data contribution template">⬇ Contribute Cluster</a>
     </div>
   </nav>
 
@@ -88,11 +89,19 @@
               ${propCell('Cluster Size (N)', m.cluster_size ? `Ag<sub>${m.cluster_size}</sub>` : '—')}
               ${propCell('Valence Number (N₀)', m.valence_number != null ? m.valence_number : '—')}
               ${propCell('Quantum Yield (Φ)', m.quantum_yield != null ? m.quantum_yield.toFixed(3) : '—')}
+              ${(function() {
+                if (!m.extinction_coefficient) return propCell('Molar Absorption Coefficient (ε)', '—');
+                const val = Math.round(m.extinction_coefficient).toLocaleString('en-US').replace(/,/g, '.');
+                const cls = m.ec_method ? 'ec-' + m.ec_method.toLowerCase() : '';
+                const badge = `<span class="ec-badge ${cls}" style="font-size:0.9rem;">${val}</span> <span style="font-size:0.65em;opacity:0.5;">M⁻¹cm⁻¹</span>`;
+                return propCell('Molar Absorption Coefficient (ε)', badge);
+              })()}
               ${propCell('Fluorescence Lifetime (ns)', irfShort(m.lifetime_ns))}
               ${propCell('Long-lived Lifetime (us)', irfShort(m.lifetime_us))}
-              ${propCell('Solvent / Matrix', m.solvent || '—')}
-              ${propCell('Chemical Formula (MS)', m.mass_formula ? chemNotation(m.mass_formula) : '—')}
-              ${propCell('Molecular Weight (MS)', m.molecular_weight ? chemNotation(m.molecular_weight) : '—')}
+              ${propCell('Chemical Formula', m.mass_formula ? chemNotation(m.mass_formula) : '—')}
+              ${propCell('Compositional Formula', m.molecular_weight ? chemNotation(m.molecular_weight) : '—')}
+              ${propCell('Solvent / Buffer', m.solvent ? chemNotation(m.solvent) : '—')}
+              ${propCell('Purification Method', m.purification_method || '—')}
             </div>
 
             ${hasSpectra ? `
@@ -111,12 +120,20 @@
           <aside>
             <div class="sidebar-card">
               <h3>References</h3>
-              ${m.reference
-                ? `${m.reference_header ? `<div class="ref-header">${m.reference_header}</div>` : ''}` +
-                  (m.doi
-                    ? `<div class="meta-row" style="display:block;"><a href="https://doi.org/${m.doi}" target="_blank" style="color:var(--accent); font-size:0.82rem; line-height:1.5; text-decoration:none;">${m.reference}</a></div>`
-                    : `<div class="meta-row" style="display:block;"><span style="font-size:0.82rem; line-height:1.5;">${m.reference}</span></div>`)
-                : `<div style="color:var(--text-dim);font-size:0.78rem;">No references added.</div>`}
+              ${(function() {
+                const refs = getReferences(m);
+                if (!refs.length) return '<div style="color:var(--text-dim);font-size:0.78rem;">No references added.</div>';
+                return refs.map((ref, i) =>
+                  `<div style="margin-bottom:0.75rem;${i > 0 ? 'padding-top:0.75rem;border-top:1px solid var(--border);' : ''}">
+                    ${ref.header ? `<div class="ref-header">${ref.header}</div>` : ''}
+                    ${ref.doi
+                      ? `<a href="https://doi.org/${ref.doi}" target="_blank" style="color:var(--accent); font-size:0.82rem; line-height:1.5; text-decoration:none;">${ref.citation || ref.doi}</a>`
+                      : ref.citation
+                        ? `<span style="font-size:0.82rem; line-height:1.5; color:var(--text);">${ref.citation}</span>`
+                        : ''}
+                  </div>`
+                ).join('');
+              })()}
               <div class="meta-row" style="display:block; margin-top:0.6rem; padding-top:0.6rem; border-top:1px solid var(--border);">
                 <div class="ref-header" style="margin-bottom:0.3rem;">Protein Data Bank</div>
                 ${m.pdb_link
@@ -416,7 +433,10 @@
       }
       render(material);
     }
-    init();
+    init().catch(err => {
+      document.getElementById('mainContent').innerHTML =
+        `<p class="muted">Could not load data/materials.json (${err.message}). Try a hard refresh (Ctrl+Shift+R).</p>`;
+    });
   </script>
 </body>
 </html>

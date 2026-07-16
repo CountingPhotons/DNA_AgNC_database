@@ -3,7 +3,7 @@
   "slug": "tbg443",
   "name": "TBG443",
   "description": "",
-  "dna_sequence": "ATCTCCACAG",
+  "dna_sequence": "GACGACGGAT",
   "cluster_size": 17,
   "valence_number": 8,
   "structure_solved": false,
@@ -11540,7 +11540,7 @@
     ]
   ],
   "created_at": "2026-07-09T12:32:01.684851",
-  "updated_at": "2026-07-15T10:36:11.780556",
-  "extinction_coefficient": 75000.0,
+  "updated_at": "2026-07-15T13:26:15.532876",
+  "extinction_coefficient": 81000.0,
   "ec_method": "DNA"
 }
