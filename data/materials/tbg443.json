@@ -9,7 +9,7 @@
   "structure_solved": false,
   "pdb_link": "",
   "parent_slug": "",
-  "mass_formula": "C_{196}H_{246}N_{86}O_{114}P_{20}[Ag_{17}]^{9+}",
+  "mass_formula": "C_{196}H_{244}N_{86}O_{112}P_{18}[Ag_{17}]^{9+}]",
   "molecular_weight": "DNA_{2}-[Ag_{17}]^{9+}",
   "purification_method": "HPLC",
   "absorption_max": 355.0,
@@ -24,6 +24,11 @@
       "header": "TBG443",
       "citation": "A. Gonz\u00e0lez-Rosell (2022) JPCL",
       "doi": "https://doi.org/10.1021/acs.jpclett.2c02207"
+    },
+    {
+      "header": "",
+      "citation": "R. Guha et al. (2023), Chem. Sci.",
+      "doi": "https://doi.org/10.1039/d3sc02931j"
     }
   ],
   "notes": "",
@@ -11540,7 +11545,7 @@
     ]
   ],
   "created_at": "2026-07-09T12:32:01.684851",
-  "updated_at": "2026-07-15T13:26:15.532876",
+  "updated_at": "2026-08-14T13:24:12.333988",
   "extinction_coefficient": 81000.0,
   "ec_method": "DNA"
 }

@@ -24,6 +24,11 @@
       "header": "",
       "citation": "A. Gonz\u00e0lez-Rosell (2022) JPCL",
       "doi": "https://doi.org/10.1021/acs.jpclett.2c02207"
+    },
+    {
+      "header": "",
+      "citation": "R. Guha et al. (2023), Chem. Sci.",
+      "doi": "https://doi.org/10.1039/d3sc02931j"
     }
   ],
   "notes": "",
@@ -10188,7 +10193,7 @@
     ]
   ],
   "created_at": "2026-07-09T12:21:50.575043",
-  "updated_at": "2026-07-15T13:28:13.040521",
+  "updated_at": "2026-08-14T09:02:24.093952",
   "extinction_coefficient": 126000.0,
   "ec_method": "DNA"
 }

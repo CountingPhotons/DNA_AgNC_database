@@ -3760,7 +3760,7 @@
     ]
   ],
   "created_at": "2026-07-09T12:04:34.871554",
-  "updated_at": "2026-07-13T12:44:55.700350",
-  "extinction_coefficient": null,
-  "ec_method": ""
+  "updated_at": "2026-07-22T11:11:05.278967",
+  "extinction_coefficient": 47000.0,
+  "ec_method": "DNA"
 }

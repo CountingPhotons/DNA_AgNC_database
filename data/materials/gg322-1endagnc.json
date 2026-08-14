@@ -9,7 +9,7 @@
   "structure_solved": true,
   "pdb_link": "https://www.rcsb.org/structure/6M2P",
   "parent_slug": "gg322",
-  "mass_formula": "C_{192}H_{244}N_{78}O_{112}P_{18}[Ag_{16}Cl_{2}]^{8+}",
+  "mass_formula": "C_{172}H_{220}N_{68}O_{102}P_{16}[Ag_{16}Cl_{2}]^{8+}",
   "molecular_weight": "DNA_{2}-[Ag_{16}Cl_{2}]^{8+}",
   "absorption_max": 523.0,
   "emission_max": 756.0,
@@ -21,7 +21,7 @@
   "reference": "C. Cerretani et al. (2020), RSC Advances",
   "reference_header": "GG322 mutants",
   "doi": "https://doi.org/10.1039/d0ra02672g",
-  "notes": "Needs to be normalized!",
+  "notes": "",
   "ab_spectrum": [
     [
       750.0,
@@ -3555,13 +3555,18 @@
     ]
   ],
   "created_at": "2026-06-26T19:29:29.219837",
-  "updated_at": "2026-07-14T10:29:39.753382",
+  "updated_at": "2026-08-14T13:09:26.364082",
   "purification_method": "HPLC",
   "references": [
     {
       "header": "GG322 mutants",
       "citation": "C. Cerretani et al. (2020), RSC Advances",
       "doi": "https://doi.org/10.1039/d0ra02672g"
+    },
+    {
+      "header": "",
+      "citation": "R. Guha eta al. (2024), Nanoscale",
+      "doi": "DOI: 10.1039/d4nr03533j"
     }
   ],
   "extinction_coefficient": 46000.0,
