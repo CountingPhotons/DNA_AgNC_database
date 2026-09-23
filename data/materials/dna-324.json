@@ -1,0 +1,36 @@
+{
+  "id": "4b1a0d03",
+  "slug": "dna-324",
+  "name": "DNA-324",
+  "description": "",
+  "dna_sequence": "GGGGATCGACGACATC",
+  "cluster_size": 23,
+  "valence_number": 14,
+  "structure_solved": false,
+  "pdb_link": "",
+  "parent_slug": "",
+  "mass_formula": "C_{312}H_{390}N_{132}O_{184}P_{30}[Ag_{23}]^{9+}",
+  "molecular_weight": "DNA_{2}-[Ag_{23}]^{9+}",
+  "purification_method": "HPLC",
+  "absorption_max": 801.0,
+  "emission_max": 856.1,
+  "emission_max_2": null,
+  "quantum_yield": null,
+  "extinction_coefficient": null,
+  "ec_method": "",
+  "lifetime_ns": "1.86",
+  "solvent": "",
+  "lifetime_us": "",
+  "references": [
+    {
+      "header": "Transfer Learning & DNA-AgNCs",
+      "citation": "A. Segger (2026), chemrxiv",
+      "doi": "10.26434/chemrxiv.15008643/v1"
+    }
+  ],
+  "notes": "",
+  "ab_spectrum": null,
+  "em_spectrum": null,
+  "created_at": "2026-09-23T09:19:00.133230",
+  "updated_at": "2026-09-23T09:48:59.357420"
+}

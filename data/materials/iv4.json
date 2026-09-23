@@ -9,7 +9,7 @@
   "structure_solved": false,
   "pdb_link": "",
   "parent_slug": "",
-  "mass_formula": "C_{294}H_{369}N_{120}O_{171}P_{27}[Ag_{20}]^{12+}",
+  "mass_formula": "C_{196}H_{246}N_{80}O_{114}P_{18}[Ag_{20}]^{12+}",
   "molecular_weight": "DNA_{2}[Ag_{20}]^{12+}",
   "purification_method": "HPLC",
   "absorption_max": 436.0,
@@ -8386,5 +8386,5 @@
     ]
   ],
   "created_at": "2026-08-14T09:05:51.557909",
-  "updated_at": "2026-08-14T09:10:20.427270"
+  "updated_at": "2026-09-23T07:57:42.818927"
 }

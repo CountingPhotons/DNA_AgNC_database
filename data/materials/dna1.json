@@ -9,18 +9,18 @@
   "structure_solved": false,
   "pdb_link": "",
   "parent_slug": "",
-  "mass_formula": "C_{172}H_{225}N_{50}O_{113}P_{17}[Ag_{10}]^{10+}",
-  "molecular_weight": "DNA_{1}-[Ag_{10}]^{6+}",
-  "purification_method": "HPLC",
+  "mass_formula": "C_{172}H_{225}N_{50}O_{113}P_{17}[Ag_{10}]^{6+}",
+  "molecular_weight": "DNA{10+}_{1}-[Ag_{10}]^{6+}",
+  "purification_method": "O2 treatmeant",
   "absorption_max": 490.0,
   "emission_max": 554.0,
-  "emission_max_2": null,
+  "emission_max_2": 692.0,
   "quantum_yield": 0.25,
   "extinction_coefficient": 48000.0,
   "ec_method": "FCS",
   "lifetime_ns": "1.9",
   "solvent": "10mM NH_{4}OAc",
-  "lifetime_us": "",
+  "lifetime_us": "80",
   "references": [
     {
       "header": "",
@@ -32,5 +32,5 @@
   "ab_spectrum": null,
   "em_spectrum": null,
   "created_at": "2026-07-10T14:10:13.111242",
-  "updated_at": "2026-07-13T13:26:56.230248"
+  "updated_at": "2026-08-17T11:15:05.943091"
 }

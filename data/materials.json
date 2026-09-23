@@ -184127,18 +184127,18 @@
     "structure_solved": false,
     "pdb_link": "",
     "parent_slug": "",
-    "mass_formula": "C_{172}H_{225}N_{50}O_{113}P_{17}[Ag_{10}]^{10+}",
-    "molecular_weight": "DNA_{1}-[Ag_{10}]^{6+}",
-    "purification_method": "HPLC",
+    "mass_formula": "C_{172}H_{225}N_{50}O_{113}P_{17}[Ag_{10}]^{6+}",
+    "molecular_weight": "DNA{10+}_{1}-[Ag_{10}]^{6+}",
+    "purification_method": "O2 treatmeant",
     "absorption_max": 490.0,
     "emission_max": 554.0,
-    "emission_max_2": null,
+    "emission_max_2": 692.0,
     "quantum_yield": 0.25,
     "extinction_coefficient": 48000.0,
     "ec_method": "FCS",
     "lifetime_ns": "1.9",
     "solvent": "10mM NH_{4}OAc",
-    "lifetime_us": "",
+    "lifetime_us": "80",
     "references": [
       {
         "header": "",
@@ -184150,7 +184150,7 @@
     "ab_spectrum": null,
     "em_spectrum": null,
     "created_at": "2026-07-10T14:10:13.111242",
-    "updated_at": "2026-07-13T13:26:56.230248"
+    "updated_at": "2026-08-17T11:15:05.943091"
   },
   {
     "id": "ae3926ad",
@@ -197443,8 +197443,8 @@
     "structure_solved": true,
     "pdb_link": "",
     "parent_slug": "",
-    "mass_formula": "C_{192}H_{244}N_{78}O_{116}P_{18}[Ag_{16}]^{14+}",
-    "molecular_weight": "DNA_{2}-[Ag_16]^{14+}",
+    "mass_formula": "C_{192}H_{244}N_{78}O_{116}P_{18}[Ag_{20}]^{14+}",
+    "molecular_weight": "DNA_{2}-[Ag_{20}]^{14+}",
     "purification_method": "HPLC",
     "absorption_max": 530.0,
     "emission_max": 639.0,
@@ -205820,7 +205820,7 @@
       ]
     ],
     "created_at": "2026-07-30T09:14:45.636639",
-    "updated_at": "2026-08-14T12:31:03.794023"
+    "updated_at": "2026-08-17T11:16:10.608227"
   },
   {
     "id": "d8fb5225",
@@ -262618,7 +262618,7 @@
     "structure_solved": false,
     "pdb_link": "",
     "parent_slug": "",
-    "mass_formula": "C_{294}H_{369}N_{120}O_{171}P_{27}[Ag_{20}]^{12+}",
+    "mass_formula": "C_{196}H_{246}N_{80}O_{114}P_{18}[Ag_{20}]^{12+}",
     "molecular_weight": "DNA_{2}[Ag_{20}]^{12+}",
     "purification_method": "HPLC",
     "absorption_max": 436.0,
@@ -270995,7 +270995,7 @@
       ]
     ],
     "created_at": "2026-08-14T09:05:51.557909",
-    "updated_at": "2026-08-14T09:10:20.427270"
+    "updated_at": "2026-09-23T07:57:42.818927"
   },
   {
     "id": "11048f8e",
@@ -271104,5 +271104,257 @@
     "em_spectrum": null,
     "created_at": "2026-08-14T13:22:14.644089",
     "updated_at": "2026-08-14T13:22:14.644111"
+  },
+  {
+    "id": "718a78cf",
+    "slug": "dna-70",
+    "name": "DNA-70",
+    "description": "",
+    "dna_sequence": "ACCTTCCTCCCAGGTG",
+    "cluster_size": 33,
+    "valence_number": 12,
+    "structure_solved": false,
+    "pdb_link": "",
+    "parent_slug": "",
+    "mass_formula": "C_{306}H_{394}N_{108}O_{192}P_{30}[Ag_{33}]^{21+}",
+    "molecular_weight": "DNA_{2}-[Ag_{33}]^{21+}",
+    "purification_method": "HPLC",
+    "absorption_max": 714.0,
+    "emission_max": 831.0,
+    "emission_max_2": null,
+    "quantum_yield": null,
+    "extinction_coefficient": null,
+    "ec_method": "",
+    "lifetime_ns": "0.83",
+    "solvent": "10mM NH_{4}OAc",
+    "lifetime_us": "",
+    "references": [
+      {
+        "header": "Transfer Learning & DNA-AgNCs",
+        "citation": "A. Segger et al. (2026), chemrxiv",
+        "doi": "10.26434/chemrxiv.15008643/v1"
+      }
+    ],
+    "notes": "",
+    "ab_spectrum": null,
+    "em_spectrum": null,
+    "created_at": "2026-09-23T08:34:56.391897",
+    "updated_at": "2026-09-23T08:45:44.614162"
+  },
+  {
+    "id": "61c3cbd4",
+    "slug": "dna-110",
+    "name": "DNA-110",
+    "description": "",
+    "dna_sequence": "TTTCCGATGTCCCCCG",
+    "cluster_size": 25,
+    "valence_number": 10,
+    "structure_solved": false,
+    "pdb_link": "",
+    "parent_slug": "",
+    "mass_formula": "C_{306}H_{396}N_{102}O_{196}P_{30}[Ag_{25}]^{15+}",
+    "molecular_weight": "DNA_{2}-[Ag_{25}]^{15+}",
+    "purification_method": "HPLC",
+    "absorption_max": 891.0,
+    "emission_max": 983.0,
+    "emission_max_2": null,
+    "quantum_yield": null,
+    "extinction_coefficient": null,
+    "ec_method": "",
+    "lifetime_ns": "0.85",
+    "solvent": "10mM NH_{4}OAc",
+    "lifetime_us": "",
+    "references": [
+      {
+        "header": "Transfer Learning & DNA-AgNCs",
+        "citation": "A. Segger et al. (2026), chemrxiv",
+        "doi": "https://chemrxiv.org/doi/full/10.26434/chemrxiv.15008643/v1"
+      }
+    ],
+    "notes": "",
+    "ab_spectrum": null,
+    "em_spectrum": null,
+    "created_at": "2026-09-23T08:45:25.082205",
+    "updated_at": "2026-09-23T08:58:31.279628"
+  },
+  {
+    "id": "a70da2b3",
+    "slug": "dna-167",
+    "name": "DNA-167",
+    "description": "",
+    "dna_sequence": "GGACACGGATCGGACA",
+    "cluster_size": 25,
+    "valence_number": 10,
+    "structure_solved": false,
+    "pdb_link": "",
+    "parent_slug": "",
+    "mass_formula": "C_{312}H_{388}N_{138}O_{180}P_{30}[Ag_{25}]^{10+}",
+    "molecular_weight": "DNA_{2}-[Ag_{25}]^{10+}",
+    "purification_method": "HPLC",
+    "absorption_max": 777.0,
+    "emission_max": 838.0,
+    "emission_max_2": null,
+    "quantum_yield": null,
+    "extinction_coefficient": null,
+    "ec_method": "",
+    "lifetime_ns": "1.97",
+    "solvent": "10mM NH_{4}OAc",
+    "lifetime_us": "",
+    "references": [
+      {
+        "header": "Transfer Learning & DNA-AgNCs",
+        "citation": "A. Segger et al. (2026), chemrxiv",
+        "doi": "https://chemrxiv.org/doi/full/10.26434/chemrxiv.15008643/v1"
+      }
+    ],
+    "notes": "",
+    "ab_spectrum": null,
+    "em_spectrum": null,
+    "created_at": "2026-09-23T08:56:26.490831",
+    "updated_at": "2026-09-23T08:56:26.490843"
+  },
+  {
+    "id": "6fe21fe0",
+    "slug": "dna-255",
+    "name": "DNA-255",
+    "description": "",
+    "dna_sequence": "CGGGACGGACATCATC",
+    "cluster_size": 15,
+    "valence_number": 8,
+    "structure_solved": false,
+    "pdb_link": "",
+    "parent_slug": "",
+    "mass_formula": "C_{155}H_{195}N_{64}O_{92}P_{15}[Ag_{15}]^{7+}",
+    "molecular_weight": "DNA_{1}-[Ag_{15}]^{7+}",
+    "purification_method": "",
+    "absorption_max": 440.0,
+    "emission_max": 843.0,
+    "emission_max_2": null,
+    "quantum_yield": null,
+    "extinction_coefficient": null,
+    "ec_method": "",
+    "lifetime_ns": "",
+    "solvent": "10mM NH_{4}OAc",
+    "lifetime_us": "",
+    "references": [
+      {
+        "header": "Transfer Learning & DNA-AgNCs",
+        "citation": "A. Segger et al. (2026), chemrxiv",
+        "doi": "10.26434/chemrxiv.15008643/v1"
+      }
+    ],
+    "notes": "",
+    "ab_spectrum": null,
+    "em_spectrum": null,
+    "created_at": "2026-09-23T09:03:31.723121",
+    "updated_at": "2026-09-23T09:03:31.723144"
+  },
+  {
+    "id": "ba3f2add",
+    "slug": "dna-263",
+    "name": "DNA-263",
+    "description": "",
+    "dna_sequence": "GGACGACGATCGGATC",
+    "cluster_size": 30,
+    "valence_number": 12,
+    "structure_solved": false,
+    "pdb_link": "",
+    "parent_slug": "",
+    "mass_formula": "C_{312}H_{390}N_{132}O_{184}P_{30}[Ag_{30}]^{12+}",
+    "molecular_weight": "DNA_{2}-[Ag_{30}]^{12+}",
+    "purification_method": "HPLC",
+    "absorption_max": 805.0,
+    "emission_max": 896.0,
+    "emission_max_2": null,
+    "quantum_yield": 0.17,
+    "extinction_coefficient": null,
+    "ec_method": "",
+    "lifetime_ns": "1.4",
+    "solvent": "10mM NH_{4}OAc",
+    "lifetime_us": "",
+    "references": [
+      {
+        "header": "Transfer Learning & DNA-AgNCs",
+        "citation": "A. Segger et al. (2026), chemrxiv",
+        "doi": "10.26434/chemrxiv.15008643/v1"
+      }
+    ],
+    "notes": "",
+    "ab_spectrum": null,
+    "em_spectrum": null,
+    "created_at": "2026-09-23T09:18:32.616696",
+    "updated_at": "2026-09-23T09:18:32.616720"
+  },
+  {
+    "id": "4b1a0d03",
+    "slug": "dna-324",
+    "name": "DNA-324",
+    "description": "",
+    "dna_sequence": "GGGGATCGACGACATC",
+    "cluster_size": 23,
+    "valence_number": 14,
+    "structure_solved": false,
+    "pdb_link": "",
+    "parent_slug": "",
+    "mass_formula": "C_{312}H_{390}N_{132}O_{184}P_{30}[Ag_{23}]^{9+}",
+    "molecular_weight": "DNA_{2}-[Ag_{23}]^{9+}",
+    "purification_method": "HPLC",
+    "absorption_max": 801.0,
+    "emission_max": 856.1,
+    "emission_max_2": null,
+    "quantum_yield": null,
+    "extinction_coefficient": null,
+    "ec_method": "",
+    "lifetime_ns": "1.86",
+    "solvent": "",
+    "lifetime_us": "",
+    "references": [
+      {
+        "header": "Transfer Learning & DNA-AgNCs",
+        "citation": "A. Segger (2026), chemrxiv",
+        "doi": "10.26434/chemrxiv.15008643/v1"
+      }
+    ],
+    "notes": "",
+    "ab_spectrum": null,
+    "em_spectrum": null,
+    "created_at": "2026-09-23T09:19:00.133230",
+    "updated_at": "2026-09-23T09:48:59.357420"
+  },
+  {
+    "id": "cf192dc7",
+    "slug": "dna-334",
+    "name": "DNA-334",
+    "description": "",
+    "dna_sequence": "GGGACGATCACGGATC",
+    "cluster_size": 13,
+    "valence_number": 8,
+    "structure_solved": false,
+    "pdb_link": "",
+    "parent_slug": "",
+    "mass_formula": "C_{156}H_{195}N_{66}O_{92}P_{15}[Ag_{13}]^{5+}",
+    "molecular_weight": "DNA-[Ag_{13}]]^{5+}",
+    "purification_method": "HPLC",
+    "absorption_max": 543.0,
+    "emission_max": 839.0,
+    "emission_max_2": null,
+    "quantum_yield": null,
+    "extinction_coefficient": null,
+    "ec_method": "",
+    "lifetime_ns": "1.86",
+    "solvent": "10mM NH_{4}OAc",
+    "lifetime_us": "",
+    "references": [
+      {
+        "header": "Transfer Learning & DNA-AgNCs",
+        "citation": "A. Segger (2026), chemrxiv",
+        "doi": "10.26434/chemrxiv.15008643/v1"
+      }
+    ],
+    "notes": "",
+    "ab_spectrum": null,
+    "em_spectrum": null,
+    "created_at": "2026-09-23T09:52:46.464155",
+    "updated_at": "2026-09-23T09:52:46.464175"
   }
 ]

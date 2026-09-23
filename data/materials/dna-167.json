@@ -1,0 +1,36 @@
+{
+  "id": "a70da2b3",
+  "slug": "dna-167",
+  "name": "DNA-167",
+  "description": "",
+  "dna_sequence": "GGACACGGATCGGACA",
+  "cluster_size": 25,
+  "valence_number": 10,
+  "structure_solved": false,
+  "pdb_link": "",
+  "parent_slug": "",
+  "mass_formula": "C_{312}H_{388}N_{138}O_{180}P_{30}[Ag_{25}]^{10+}",
+  "molecular_weight": "DNA_{2}-[Ag_{25}]^{10+}",
+  "purification_method": "HPLC",
+  "absorption_max": 777.0,
+  "emission_max": 838.0,
+  "emission_max_2": null,
+  "quantum_yield": null,
+  "extinction_coefficient": null,
+  "ec_method": "",
+  "lifetime_ns": "1.97",
+  "solvent": "10mM NH_{4}OAc",
+  "lifetime_us": "",
+  "references": [
+    {
+      "header": "Transfer Learning & DNA-AgNCs",
+      "citation": "A. Segger et al. (2026), chemrxiv",
+      "doi": "https://chemrxiv.org/doi/full/10.26434/chemrxiv.15008643/v1"
+    }
+  ],
+  "notes": "",
+  "ab_spectrum": null,
+  "em_spectrum": null,
+  "created_at": "2026-09-23T08:56:26.490831",
+  "updated_at": "2026-09-23T08:56:26.490843"
+}

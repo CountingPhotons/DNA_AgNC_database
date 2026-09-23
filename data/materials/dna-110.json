@@ -1,0 +1,36 @@
+{
+  "id": "61c3cbd4",
+  "slug": "dna-110",
+  "name": "DNA-110",
+  "description": "",
+  "dna_sequence": "TTTCCGATGTCCCCCG",
+  "cluster_size": 25,
+  "valence_number": 10,
+  "structure_solved": false,
+  "pdb_link": "",
+  "parent_slug": "",
+  "mass_formula": "C_{306}H_{396}N_{102}O_{196}P_{30}[Ag_{25}]^{15+}",
+  "molecular_weight": "DNA_{2}-[Ag_{25}]^{15+}",
+  "purification_method": "HPLC",
+  "absorption_max": 891.0,
+  "emission_max": 983.0,
+  "emission_max_2": null,
+  "quantum_yield": null,
+  "extinction_coefficient": null,
+  "ec_method": "",
+  "lifetime_ns": "0.85",
+  "solvent": "10mM NH_{4}OAc",
+  "lifetime_us": "",
+  "references": [
+    {
+      "header": "Transfer Learning & DNA-AgNCs",
+      "citation": "A. Segger et al. (2026), chemrxiv",
+      "doi": "https://chemrxiv.org/doi/full/10.26434/chemrxiv.15008643/v1"
+    }
+  ],
+  "notes": "",
+  "ab_spectrum": null,
+  "em_spectrum": null,
+  "created_at": "2026-09-23T08:45:25.082205",
+  "updated_at": "2026-09-23T08:58:31.279628"
+}
