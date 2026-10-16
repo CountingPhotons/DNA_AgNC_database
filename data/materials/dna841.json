@@ -1,7 +1,7 @@
 {
   "id": "6be1a2dc",
   "slug": "dna841",
-  "name": "DNA841",
+  "name": "DNA-841",
   "description": "Estimated to be double stranded but no mass spec data has been recorded and cluster size is undetermined.",
   "dna_sequence": "GACACGGACC",
   "cluster_size": null,
@@ -3984,7 +3984,7 @@
     ]
   ],
   "created_at": "2026-07-09T12:25:48.459034",
-  "updated_at": "2026-07-14T10:27:59.294215",
+  "updated_at": "2026-10-16T08:54:15.872628",
   "extinction_coefficient": 49000.0,
   "ec_method": "DNA"
 }

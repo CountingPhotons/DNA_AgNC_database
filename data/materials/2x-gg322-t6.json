@@ -9,8 +9,8 @@
   "structure_solved": true,
   "pdb_link": "",
   "parent_slug": "gg322",
-  "mass_formula": "C_{504}H_{642}N_{180}O_{312}P_{50}",
-  "molecular_weight": "DNA_{2}-[Ag_{16}Cl_{2}]^{8+}",
+  "mass_formula": "C_{252}H_{321}N_{90}O_{156}P_{25}",
+  "molecular_weight": "DNA_{1}-[Ag_{16}Cl_{2}]^{8+}",
   "purification_method": "HPLC",
   "absorption_max": 524.0,
   "emission_max": 747.0,
@@ -3362,5 +3362,5 @@
     ]
   ],
   "created_at": "2026-07-16T10:08:25.677214",
-  "updated_at": "2026-07-16T10:08:25.677236"
+  "updated_at": "2026-10-16T08:27:53.822181"
 }

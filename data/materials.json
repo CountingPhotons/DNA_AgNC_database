@@ -63278,7 +63278,7 @@
     "structure_solved": false,
     "pdb_link": "",
     "parent_slug": "",
-    "mass_formula": "C_{97}H_{122}M_{41}O_{55}P_{9}[Ag_{11}]^{7+}",
+    "mass_formula": "C_{194}H_{244}N_{82}O_{110}P_{18}[Ag_{11}]^{7+}",
     "molecular_weight": "DNA_{2}-[Ag_{11}]^{7+}",
     "absorption_max": 472.0,
     "emission_max": 535.0,
@@ -66384,13 +66384,13 @@
       ]
     ],
     "created_at": "2026-07-08T09:53:56.425854",
-    "updated_at": "2026-07-14T10:18:27.801515",
+    "updated_at": "2026-10-16T08:08:42.668512",
     "purification_method": "HPLC",
     "references": [
       {
         "header": "",
-        "citation": "D. Schultz et al. (2013), Adv. Mat.",
-        "doi": "https://doi.org/10.1002/adma.201204624"
+        "citation": "E. Gwinn et al. (2014), J. Phys. Chem. Lett.",
+        "doi": "https://doi.org/10.1021/jz500146q"
       }
     ],
     "extinction_coefficient": 77000.0,
@@ -73171,11 +73171,17 @@
     "absorption_max": 842.0,
     "emission_max": 963.0,
     "emission_max_2": null,
-    "quantum_yield": 0.12,
+    "quantum_yield": 0.11,
     "lifetime_ns": "0.72",
     "solvent": "50mM NH_{4}OAc",
     "lifetime_us": "",
-    "references": [],
+    "references": [
+      {
+        "header": "GR4 Mutants",
+        "citation": "G. Romolini et al. (2026), ChemComm",
+        "doi": "10.1039/d5cc06634d"
+      }
+    ],
     "notes": "",
     "ab_spectrum": [
       [
@@ -79898,7 +79904,7 @@
       ]
     ],
     "created_at": "2026-07-09T10:01:24.286294",
-    "updated_at": "2026-07-15T10:02:36.464413",
+    "updated_at": "2026-10-16T08:57:24.215937",
     "extinction_coefficient": 191000.0,
     "ec_method": "DNA"
   },
@@ -88152,7 +88158,7 @@
       ]
     ],
     "created_at": "2026-07-09T10:14:19.899220",
-    "updated_at": "2026-07-15T10:23:39.243600",
+    "updated_at": "2026-10-16T08:59:01.737742",
     "extinction_coefficient": 94000.0,
     "ec_method": "DNA"
   },
@@ -134662,7 +134668,7 @@
   {
     "id": "a0cc0d5b",
     "slug": "dna811",
-    "name": "DNA811",
+    "name": "DNA-811",
     "description": "",
     "dna_sequence": "AGTCACGACA",
     "cluster_size": 16,
@@ -134674,7 +134680,7 @@
     "molecular_weight": "DNA_{2}-[Ag_{16}]^{10+}",
     "purification_method": "HPLC",
     "absorption_max": 638.0,
-    "emission_max": 816.0,
+    "emission_max": 808.0,
     "emission_max_2": null,
     "quantum_yield": 0.07,
     "lifetime_ns": "1.86",
@@ -138655,14 +138661,14 @@
       ]
     ],
     "created_at": "2026-07-09T12:24:09.780038",
-    "updated_at": "2026-08-14T12:37:25.598973",
+    "updated_at": "2026-10-16T08:56:13.262898",
     "extinction_coefficient": 56000.0,
     "ec_method": "DNA"
   },
   {
     "id": "6be1a2dc",
     "slug": "dna841",
-    "name": "DNA841",
+    "name": "DNA-841",
     "description": "Estimated to be double stranded but no mass spec data has been recorded and cluster size is undetermined.",
     "dna_sequence": "GACACGGACC",
     "cluster_size": null,
@@ -142645,7 +142651,7 @@
       ]
     ],
     "created_at": "2026-07-09T12:25:48.459034",
-    "updated_at": "2026-07-14T10:27:59.294215",
+    "updated_at": "2026-10-16T08:54:15.872628",
     "extinction_coefficient": 49000.0,
     "ec_method": "DNA"
   },
@@ -142660,7 +142666,7 @@
     "structure_solved": false,
     "pdb_link": "",
     "parent_slug": "",
-    "mass_formula": "C_{196}H_{244}N_{86}O_{112}P_{18}[Ag_{17}]^{9+}]",
+    "mass_formula": "C_{196}H_{244}N_{86}O_{112}P_{18}[Ag_{17}]^{9+}",
     "molecular_weight": "DNA_{2}-[Ag_{17}]^{9+}",
     "purification_method": "HPLC",
     "absorption_max": 355.0,
@@ -154196,7 +154202,7 @@
       ]
     ],
     "created_at": "2026-07-09T12:32:01.684851",
-    "updated_at": "2026-08-14T13:24:12.333988",
+    "updated_at": "2026-10-16T08:57:49.504294",
     "extinction_coefficient": 81000.0,
     "ec_method": "DNA"
   },
@@ -184121,14 +184127,14 @@
     "slug": "dna1",
     "name": "DNA-554",
     "description": "",
-    "dna_sequence": "CCCCACTTTTCCCGTTTT",
+    "dna_sequence": "CCCCACCCCTCCCGTTTT",
     "cluster_size": 10,
     "valence_number": 4,
     "structure_solved": false,
     "pdb_link": "",
     "parent_slug": "",
     "mass_formula": "C_{172}H_{225}N_{50}O_{113}P_{17}[Ag_{10}]^{6+}",
-    "molecular_weight": "DNA{10+}_{1}-[Ag_{10}]^{6+}",
+    "molecular_weight": "DNA_{1}-[Ag_{10}]^{6+}",
     "purification_method": "O2 treatmeant",
     "absorption_max": 490.0,
     "emission_max": 554.0,
@@ -184150,7 +184156,7 @@
     "ab_spectrum": null,
     "em_spectrum": null,
     "created_at": "2026-07-10T14:10:13.111242",
-    "updated_at": "2026-08-17T11:15:05.943091"
+    "updated_at": "2026-10-16T11:48:04.492129"
   },
   {
     "id": "ae3926ad",
@@ -184172,7 +184178,7 @@
     "quantum_yield": 0.46,
     "extinction_coefficient": 176000.0,
     "ec_method": "ICPOES",
-    "lifetime_ns": "1.56",
+    "lifetime_ns": "1.9",
     "solvent": "50mM NH_{4}OAc",
     "lifetime_us": "",
     "references": [
@@ -187332,7 +187338,7 @@
       ]
     ],
     "created_at": "2026-07-13T12:36:03.143450",
-    "updated_at": "2026-07-14T08:45:01.540732"
+    "updated_at": "2026-10-16T08:51:13.714195"
   },
   {
     "id": "4728caf8",
@@ -187345,8 +187351,8 @@
     "structure_solved": false,
     "pdb_link": "",
     "parent_slug": "gg322",
-    "mass_formula": "C_{464}H_{590}N_{172}O_{284}P_{46}",
-    "molecular_weight": "DNA_{2}-[Ag_{16}Cl_{2}]^{8+}",
+    "mass_formula": "C_{232}H_{295}N_{86}O_{142}P_{23}",
+    "molecular_weight": "DNA_{1}-[Ag_{16}Cl_{2}]^{8+}",
     "purification_method": "HPLC",
     "absorption_max": 523.0,
     "emission_max": 753.0,
@@ -187359,7 +187365,7 @@
     "lifetime_us": "",
     "references": [
       {
-        "header": "GG322 mutants",
+        "header": "",
         "citation": "V. R\u00fcck et al. (2026), Inorg. Chem. Front.",
         "doi": "https://doi.org/10.1039/d5qi02482j"
       }
@@ -190698,7 +190704,7 @@
       ]
     ],
     "created_at": "2026-07-16T09:53:57.167971",
-    "updated_at": "2026-07-16T09:59:34.096876"
+    "updated_at": "2026-10-16T08:11:11.447693"
   },
   {
     "id": "aeba1840",
@@ -190711,8 +190717,8 @@
     "structure_solved": true,
     "pdb_link": "https://www.rcsb.org/structure/9XV9",
     "parent_slug": "gg322",
-    "mass_formula": "C_{484}H_{616}N_{176}O_{298}P_{48}[Ag_{16}Cl_{2}]^{8+}",
-    "molecular_weight": "DNA_{2}-[Ag_{16}Cl_{2}]^{8+}",
+    "mass_formula": "C_{242}H_{308}N_{88}O_{149}P_{24}[Ag_{16}Cl_{2}]^{8+}",
+    "molecular_weight": "DNA_{1}-[Ag_{16}Cl_{2}]^{8+}",
     "purification_method": "HPLC",
     "absorption_max": 524.0,
     "emission_max": 749.0,
@@ -194064,7 +194070,7 @@
       ]
     ],
     "created_at": "2026-07-16T09:59:23.186810",
-    "updated_at": "2026-07-16T10:01:32.658217"
+    "updated_at": "2026-10-16T08:27:43.370253"
   },
   {
     "id": "eb8edb83",
@@ -194077,8 +194083,8 @@
     "structure_solved": true,
     "pdb_link": "",
     "parent_slug": "gg322",
-    "mass_formula": "C_{504}H_{642}N_{180}O_{312}P_{50}",
-    "molecular_weight": "DNA_{2}-[Ag_{16}Cl_{2}]^{8+}",
+    "mass_formula": "C_{252}H_{321}N_{90}O_{156}P_{25}",
+    "molecular_weight": "DNA_{1}-[Ag_{16}Cl_{2}]^{8+}",
     "purification_method": "HPLC",
     "absorption_max": 524.0,
     "emission_max": 747.0,
@@ -197430,7 +197436,7 @@
       ]
     ],
     "created_at": "2026-07-16T10:08:25.677214",
-    "updated_at": "2026-07-16T10:08:25.677236"
+    "updated_at": "2026-10-16T08:27:53.822181"
   },
   {
     "id": "9768aaaa",
@@ -271168,14 +271174,14 @@
       {
         "header": "Transfer Learning & DNA-AgNCs",
         "citation": "A. Segger et al. (2026), chemrxiv",
-        "doi": "https://chemrxiv.org/doi/full/10.26434/chemrxiv.15008643/v1"
+        "doi": "https://doi.org/10.26434/chemrxiv.15008643/v1"
       }
     ],
     "notes": "",
     "ab_spectrum": null,
     "em_spectrum": null,
     "created_at": "2026-09-23T08:45:25.082205",
-    "updated_at": "2026-09-23T08:58:31.279628"
+    "updated_at": "2026-10-16T08:32:06.192749"
   },
   {
     "id": "a70da2b3",
@@ -271204,14 +271210,14 @@
       {
         "header": "Transfer Learning & DNA-AgNCs",
         "citation": "A. Segger et al. (2026), chemrxiv",
-        "doi": "https://chemrxiv.org/doi/full/10.26434/chemrxiv.15008643/v1"
+        "doi": "https://doi.org/10.26434/chemrxiv.15008643/v1"
       }
     ],
     "notes": "",
     "ab_spectrum": null,
     "em_spectrum": null,
     "created_at": "2026-09-23T08:56:26.490831",
-    "updated_at": "2026-09-23T08:56:26.490843"
+    "updated_at": "2026-10-16T08:32:20.265144"
   },
   {
     "id": "6fe21fe0",
@@ -271260,8 +271266,8 @@
     "structure_solved": false,
     "pdb_link": "",
     "parent_slug": "",
-    "mass_formula": "C_{312}H_{390}N_{132}O_{184}P_{30}[Ag_{30}]^{12+}",
-    "molecular_weight": "DNA_{2}-[Ag_{30}]^{12+}",
+    "mass_formula": "C_{312}H_{390}N_{132}O_{184}P_{30}[Ag_{30}]^{18+}",
+    "molecular_weight": "DNA_{2}-[Ag_{30}]^{18+}",
     "purification_method": "HPLC",
     "absorption_max": 805.0,
     "emission_max": 896.0,
@@ -271283,7 +271289,7 @@
     "ab_spectrum": null,
     "em_spectrum": null,
     "created_at": "2026-09-23T09:18:32.616696",
-    "updated_at": "2026-09-23T09:18:32.616720"
+    "updated_at": "2026-10-16T08:41:48.856455"
   },
   {
     "id": "4b1a0d03",
@@ -271300,7 +271306,7 @@
     "molecular_weight": "DNA_{2}-[Ag_{23}]^{9+}",
     "purification_method": "HPLC",
     "absorption_max": 801.0,
-    "emission_max": 856.1,
+    "emission_max": 858.0,
     "emission_max_2": null,
     "quantum_yield": null,
     "extinction_coefficient": null,
@@ -271319,7 +271325,7 @@
     "ab_spectrum": null,
     "em_spectrum": null,
     "created_at": "2026-09-23T09:19:00.133230",
-    "updated_at": "2026-09-23T09:48:59.357420"
+    "updated_at": "2026-10-16T08:46:59.710516"
   },
   {
     "id": "cf192dc7",
@@ -271333,7 +271339,7 @@
     "pdb_link": "",
     "parent_slug": "",
     "mass_formula": "C_{156}H_{195}N_{66}O_{92}P_{15}[Ag_{13}]^{5+}",
-    "molecular_weight": "DNA-[Ag_{13}]]^{5+}",
+    "molecular_weight": "DNA_{1}-[Ag_{13}]^{5+}",
     "purification_method": "HPLC",
     "absorption_max": 543.0,
     "emission_max": 839.0,
@@ -271341,7 +271347,7 @@
     "quantum_yield": null,
     "extinction_coefficient": null,
     "ec_method": "",
-    "lifetime_ns": "1.86",
+    "lifetime_ns": "",
     "solvent": "10mM NH_{4}OAc",
     "lifetime_us": "",
     "references": [
@@ -271355,6 +271361,6 @@
     "ab_spectrum": null,
     "em_spectrum": null,
     "created_at": "2026-09-23T09:52:46.464155",
-    "updated_at": "2026-09-23T09:52:46.464175"
+    "updated_at": "2026-10-16T08:50:26.766366"
   }
 ]

@@ -9,8 +9,8 @@
   "structure_solved": false,
   "pdb_link": "",
   "parent_slug": "gg322",
-  "mass_formula": "C_{464}H_{590}N_{172}O_{284}P_{46}",
-  "molecular_weight": "DNA_{2}-[Ag_{16}Cl_{2}]^{8+}",
+  "mass_formula": "C_{232}H_{295}N_{86}O_{142}P_{23}",
+  "molecular_weight": "DNA_{1}-[Ag_{16}Cl_{2}]^{8+}",
   "purification_method": "HPLC",
   "absorption_max": 523.0,
   "emission_max": 753.0,
@@ -23,7 +23,7 @@
   "lifetime_us": "",
   "references": [
     {
-      "header": "GG322 mutants",
+      "header": "",
       "citation": "V. R\u00fcck et al. (2026), Inorg. Chem. Front.",
       "doi": "https://doi.org/10.1039/d5qi02482j"
     }
@@ -3362,5 +3362,5 @@
     ]
   ],
   "created_at": "2026-07-16T09:53:57.167971",
-  "updated_at": "2026-07-16T09:59:34.096876"
+  "updated_at": "2026-10-16T08:11:11.447693"
 }

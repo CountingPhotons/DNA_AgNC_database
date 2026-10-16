@@ -9,8 +9,8 @@
   "structure_solved": true,
   "pdb_link": "https://www.rcsb.org/structure/9XV9",
   "parent_slug": "gg322",
-  "mass_formula": "C_{484}H_{616}N_{176}O_{298}P_{48}[Ag_{16}Cl_{2}]^{8+}",
-  "molecular_weight": "DNA_{2}-[Ag_{16}Cl_{2}]^{8+}",
+  "mass_formula": "C_{242}H_{308}N_{88}O_{149}P_{24}[Ag_{16}Cl_{2}]^{8+}",
+  "molecular_weight": "DNA_{1}-[Ag_{16}Cl_{2}]^{8+}",
   "purification_method": "HPLC",
   "absorption_max": 524.0,
   "emission_max": 749.0,
@@ -3362,5 +3362,5 @@
     ]
   ],
   "created_at": "2026-07-16T09:59:23.186810",
-  "updated_at": "2026-07-16T10:01:32.658217"
+  "updated_at": "2026-10-16T08:27:43.370253"
 }
