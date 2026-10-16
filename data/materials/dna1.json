@@ -24,13 +24,18 @@
   "references": [
     {
       "header": "",
-      "citation": "C.J. Setzler (2023), J. Phys. Chem.",
+      "citation": "C.J. Setzler et al. (2023), J. Phys. Chem.",
       "doi": "https://doi.org/10.1021/acs.jpcb.3c06358"
+    },
+    {
+      "header": "",
+      "citation": "Y. Zhang et al. (2021), J. Chem. Phys.",
+      "doi": "https://doi.org/10.1063/5.0056836"
     }
   ],
   "notes": "",
   "ab_spectrum": null,
   "em_spectrum": null,
   "created_at": "2026-07-10T14:10:13.111242",
-  "updated_at": "2026-10-16T11:48:04.492129"
+  "updated_at": "2026-10-16T14:03:06.137990"
 }
